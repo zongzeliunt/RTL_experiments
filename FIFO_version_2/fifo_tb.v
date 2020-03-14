@@ -86,6 +86,7 @@ always@(posedge CLK) begin
 	else begin
 		//if (fifo_empty != 1) begin
 		if (fifo_empty != 1 && fifo_full == 1) begin
+			//这只是一个tb里的试验，上面是只要fifo不空就读，下面是等fifo写满了再读，这样可以做极限测试。
 			fifo_read <= 1;
 		end 
 		else begin
