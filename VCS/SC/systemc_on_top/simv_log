@@ -1,0 +1,367 @@
+19:40:11 (snpslmd) OUT: "VCSRuntime_Net" ares@ares-XPS-8930  
+Chronologic VCS simulator copyright 1991-2016
+Contains Synopsys proprietary information.
+Compiler version L-2016.06_Full64; Runtime version L-2016.06_Full64;  Apr 13 19:40 2020
+
+Note-[SC-TCMM-V2] Type conversion mismatch
+  Mapping a (signed) 'int' data type onto a (unsigned) 'reg [31:0] 
+  adder_inst_R_ina' can lose information.
+  Adjust the port definitions at the interface between your SystemC and 
+  Verilog modules. 
+
+
+Note-[SC-TCMM-V2] Type conversion mismatch
+  Mapping a (signed) 'int' data type onto a (unsigned) 'reg [31:0] 
+  adder_inst_R_inb' can lose information.
+  Adjust the port definitions at the interface between your SystemC and 
+  Verilog modules. 
+
+
+Note-[SC-TCMM-V4] Type conversion mismatch
+  Mapping an (unsigned) 'wire [31:0] outx' onto a (signed) 'int' data type can
+  lose information.
+  Adjust the port definitions at the interface between your SystemC and 
+  Verilog modules. 
+
+
+Note-[SC-TCMM-V5] Type conversion mismatch
+  Mapping a 4-state logic 'wire [31:0] outx' onto a 2-state type 'int' 
+  converts all 'x' and 'z' values into '0'.
+  To prevent this conversion, adjust the port types at the interface between 
+  your SystemC and Verilog modules. 
+
+
+Note-[SC-TCMM-V2] Type conversion mismatch
+  Mapping a (signed) 'int' data type onto a (unsigned) 'reg [31:0] 
+  multiplier_inst_R_ina' can lose information.
+  Adjust the port definitions at the interface between your SystemC and 
+  Verilog modules. 
+
+
+Note-[SC-TCMM-V2] Type conversion mismatch
+  Mapping a (signed) 'int' data type onto a (unsigned) 'reg [31:0] 
+  multiplier_inst_R_inb' can lose information.
+  Adjust the port definitions at the interface between your SystemC and 
+  Verilog modules. 
+
+
+Note-[SC-TCMM-V4] Type conversion mismatch
+  Mapping an (unsigned) 'wire [31:0] outx' onto a (signed) 'int' data type can
+  lose information.
+  Adjust the port definitions at the interface between your SystemC and 
+  Verilog modules. 
+
+
+Note-[SC-TCMM-V5] Type conversion mismatch
+  Mapping a 4-state logic 'wire [31:0] outx' onto a 2-state type 'int' 
+  converts all 'x' and 'z' values into '0'.
+  To prevent this conversion, adjust the port types at the interface between 
+  your SystemC and Verilog modules. 
+
+Cycle 0 for values A=0 B=0
+Results: A+B=0 A-B=0 A*B=0
+
+Cycle 1 for values A=2 B=2
+Results: A+B=0 A-B=0 A*B=0
+
+Cycle 2 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 3 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 4 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 5 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 6 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 7 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 8 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 9 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Cycle 10 for values A=11 B=2
+Results: A+B=13 A-B=-9 A*B=22
+
+Cycle 11 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Cycle 12 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 13 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 14 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 15 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 16 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 17 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 18 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 19 for values A=2 B=2
+Results: A+B=4 A-B=0 A*B=4
+
+Cycle 20 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 21 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 22 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 23 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 24 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 25 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 26 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 27 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Cycle 28 for values A=11 B=2
+Results: A+B=13 A-B=-9 A*B=22
+
+Cycle 29 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Cycle 30 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 31 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 32 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 33 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 34 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 35 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 36 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 37 for values A=2 B=2
+Results: A+B=4 A-B=0 A*B=4
+
+Cycle 38 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 39 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 40 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 41 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 42 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 43 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 44 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 45 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Cycle 46 for values A=11 B=2
+Results: A+B=13 A-B=-9 A*B=22
+
+Cycle 47 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Cycle 48 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 49 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 50 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 51 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 52 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 53 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 54 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 55 for values A=2 B=2
+Results: A+B=4 A-B=0 A*B=4
+
+Cycle 56 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 57 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 58 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 59 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 60 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 61 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 62 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 63 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Cycle 64 for values A=11 B=2
+Results: A+B=13 A-B=-9 A*B=22
+
+Cycle 65 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Cycle 66 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 67 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 68 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 69 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 70 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 71 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 72 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 73 for values A=2 B=2
+Results: A+B=4 A-B=0 A*B=4
+
+Cycle 74 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 75 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 76 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 77 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 78 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 79 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 80 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 81 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Cycle 82 for values A=11 B=2
+Results: A+B=13 A-B=-9 A*B=22
+
+Cycle 83 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Cycle 84 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 85 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 86 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 87 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 88 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 89 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 90 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 91 for values A=2 B=2
+Results: A+B=4 A-B=0 A*B=4
+
+Cycle 92 for values A=3 B=2
+Results: A+B=5 A-B=-1 A*B=6
+
+Cycle 93 for values A=4 B=2
+Results: A+B=6 A-B=-2 A*B=8
+
+Cycle 94 for values A=5 B=2
+Results: A+B=7 A-B=-3 A*B=10
+
+Cycle 95 for values A=6 B=2
+Results: A+B=8 A-B=-4 A*B=12
+
+Cycle 96 for values A=7 B=2
+Results: A+B=9 A-B=-5 A*B=14
+
+Cycle 97 for values A=8 B=2
+Results: A+B=10 A-B=-6 A*B=16
+
+Cycle 98 for values A=9 B=2
+Results: A+B=11 A-B=-7 A*B=18
+
+Cycle 99 for values A=10 B=2
+Results: A+B=12 A-B=-8 A*B=20
+
+Simulation of 100
+SystemC: simulation stopped by user.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 1960 ps
+CPU Time:      0.190 seconds;       Data structure size:   0.0Mb
+Mon Apr 13 19:40:11 2020
+19:40:11 (snpslmd) IN: "VCSRuntime_Net" ares@ares-XPS-8930  
