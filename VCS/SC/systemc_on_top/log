@@ -1,0 +1,14 @@
+
+vlogan -full64 -cpp g++-4.8 -sysc -sc_model adder -sc_portmap the.map adder.v
+
+vlogan -full64 -cpp g++-4.8 -sysc -sc_model multiplier -sc_portmap the.map multiplier.v
+
+
+
+syscsim -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed -sysc -cflags -g -debug_access+all  -timescale=1ps/1ps  stimulus.cpp display.cpp subtracter.cpp top.cpp main.cpp  -l comp_debug.log
+
+./simv -l run_debug.log  -gui -i systemc_on_top.tcl
+
+
+
+

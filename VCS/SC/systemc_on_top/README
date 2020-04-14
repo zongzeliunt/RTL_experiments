@@ -1,0 +1,32 @@
+
+Keywords:
+		Search keywords:       SystemC  
+ 
+
+Technical content:
+ 
+		Title:   SYSTEMC ON TOP
+		Objective:    To demonstrate a SystemC on top model with an example 
+                Description:  This example illustrates a Verilog adder and multiplier module that is instantiated in a SystemC design.
+
+		Additional setup: It is strongly recommended to use the gcc compiler from the VG Gnu package to compile this example. The package is available on EST. See the VCS documentation how to install the package.
+
+To run the testcase:
+        Using shell scripts:
+                clean.csh       -- To clean up the log files and executable of previous run
+                comp.csh        -- To compile the design in native mode.
+                run.csh         -- To runt he design in native mode.
+                comp_debug.csh  -- To compile the design in debug mode.
+                run_debug.csh   -- To run the design in debug mode.
+        Using Makefile:
+                clean           -- To clean up the log files and executable of previous run
+                comp            -- To compile the design in native mode.
+                run             -- To runt he design in native mode.
+                comp_debug      -- To compile the design in debug mode.
+                run_debug       -- To run the design in debug mode.
+
+
+Location Information:
+		PATH: 			$VCS_HOME/doc/examples/systemc/vcs/systemc_on_top    
+		DIAGRAMS: 		None
+		Cross Reference:	$VCS_HOME/doc/UserGuide/vcs.pdf

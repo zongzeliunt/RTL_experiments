@@ -1,0 +1,6 @@
+4
+-1110735011
+multiplier.v 
+-full64 -cpp g++-4.8 multiplier.v
+   /home/ares/synopsys/vcs/linux64/bin/vcs1 -Mcc=gcc -Mcplusplus=g++-4.8 -Masflags= -Mcfl=' -pipe -O -I/home/ares/synopsys/vcs/include ' -Mldflags=" " -Mout=simv -Mamsrun="" -Mvcsaceobjs="" -Mobjects=" " -Msaverestoreobj= -Mcrt0="" -Mcrtn="" -Mcsrc="" -Msyslibs="-ldl "
+-Xvlogan=0x1 -full64  "multiplier.v"    
