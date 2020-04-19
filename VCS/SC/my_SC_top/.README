@@ -1,0 +1,40 @@
+The elaboration of the design failed. This file here give hints
+how to debug the failure. You may also refer to the SystemC chapter
+of the VCS user guide.
+
+The design has SystemC-on-top-HDL down. It is elaborated in two phases.
+The first phase contains a partial simulation that contains just 
+the SystemC but no HDL parts. This partial simulation was executed
+and failed unexpectedly.
+
+Some possible reasons for the failure:
+- an error from the SystemC kernel, for example incomplete port bindings
+- a SEGV/crash in user C++ code, for example accessing a NULL pointer
+- the sc_main() function returned with a status other than 0, for 
+  example because the argc/argv arguments are not as expected
+- the SystemC module constructors were not executed for some other reason
+
+The design cannot simulation as usual because it is not properly elaborated.
+But you can debug the design in order to identify and fix the issue that
+broke the SystemC part.
+
+To reproduce the error, follow these steps:
+  /bin/mv .elab.error 
+  setenv SYSTEMC_ELAB_ONLY 1
+  
+
+To debug the error with gdb, follow these steps:
+  /bin/mv .elab.error 
+  /home/ares/synopsys/vcs/linux64/bin/cbug-gdb-64/bin/gdb --args 
+
+In gdb type:
+  set environ SYSTEMC_ELAB_ONLY=1
+  directory /home/ares/synopsys/vcs/etc/cbug
+  break cbug_stop_here
+  run
+
+Function cbug_stop_here(...) is called when the SystemC kernel is 
+emitting an error. It is also called in some other situations.
+
+Note that neither UCLI, CBug nor DVEcan be used because the simulation
+is not yet fully elaborated.

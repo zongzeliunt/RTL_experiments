@@ -1,0 +1,18 @@
+gvim /home/ares/synopsys/vcs/include/systemc22/systemc_.h
+
+换：
+using std::gets;
+---->
+
+#if defined(__cplusplus) && (__cplusplus < 201103L)
+using std::gets;
+#endif
+
+syscan -full64 -cpp g++-4.8 sc_add.cpp:sc_add
+
+vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed -sysc top.v multiplier.v -timescale=1ps/1ps -l comp.log
+
+
+
+
+

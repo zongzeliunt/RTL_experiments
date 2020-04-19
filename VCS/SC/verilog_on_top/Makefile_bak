@@ -1,0 +1,26 @@
+all : comp run comp_debug  run_debug  
+
+clean :
+	\rm -rf csrc AN.DB simv* *.log DEFAULT.DB   DVEfiles/ *.vpd
+
+
+comp : clean
+	syscan  -cpp g++   sc_add.cpp:sc_add 
+	syscan  -cpp g++   sc_subtracter.cpp:sc_subtracter 
+	vcs  -cpp g++ -cc gcc  -sysc top.v multiplier.v -timescale=1ps/1ps -l comp.log
+run :
+	simv -l run.log 
+
+
+comp_debug  : clean 
+	\rm -rf csrc AN.DB simv*  DEFAULT.DB   DVEfiles/ *.vpd
+	syscan -cpp g++ sc_add.cpp:sc_add -cflags "-g"
+	syscan -cpp g++ sc_subtracter.cpp:sc_subtracter -cflags "-g"
+	vcs -cpp g++ -cc gcc -sysc -debug_access+all  top.v multiplier.v -timescale=1ps/1ps -l comp_debug.log 
+run_debug :
+	simv -gui -l run_debug.log -i verilog_on_top.tcl
+
+
+
+
+

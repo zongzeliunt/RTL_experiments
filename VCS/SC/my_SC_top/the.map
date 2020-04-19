@@ -1,0 +1,4 @@
+#port           width             Verilog         SystemC
+ina             32                bitvector       int
+inb             32                bitvector       int
+outx            32                bitvector       int
