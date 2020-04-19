@@ -1,0 +1,6 @@
+5
+-1830975826
+/home/ares/FPGA/VCS/SC/vlog_env/csrc/sysc/adder/adder.v 
++v2k -sverilog -full64 -q /home/ares/FPGA/VCS/SC/vlog_env/csrc/sysc/adder/adder.v
+   /home/ares/synopsys/vcs/linux64/bin/vcs1 -Mcc=gcc -Mcplusplus=g++ -Masflags= -Mcfl=' -pipe -O -I/home/ares/synopsys/vcs/include ' -Mldflags=" -Wl,-E,-rpath /home/ares/synopsys/vcs/linux64/lib " -Mout=simv -Mamsrun="" -Mvcsaceobjs="" -Mobjects=" " -Msaverestoreobj= -Mcrt0="" -Mcrtn="" -Mcsrc="" -Msyslibs="-lncurses -L/usr/X11R6/lib64 -lX11 -ldl -ldl "
+-Xvlogan=0x1 +v2k -sverilog -full64 -q  "/home/ares/FPGA/VCS/SC/vlog_env/csrc/sysc/adder/adder.v"  +mixedhdl2    

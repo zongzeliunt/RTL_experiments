@@ -1,0 +1,19 @@
+
+dve -vpd inter.vpd
+以上无用，作为reference
+
+
+
+syscan -cflags "-g" -full64 -cpp g++-4.8 adder.cpp
+
+
+生成vcd文件：
+vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed -sysc -debug_pp +vcd+vcdpluson adder_tb.v -timescale=1ps/1ps
+	1) 在adder_tb.v里要有这个：
+	initial begin
+		$vcdpluson;
+	end
+
+	2) -timescale=1ps/1ps 是因为adder_tb里有`timescale 1ps/1ps
+
+
