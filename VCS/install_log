@@ -1,0 +1,30 @@
+安装教程在https://blog.csdn.net/huayangshiboqi/article/details/89525723
+
+每一次用VCS以前必须先跑lmg_vcs这样可以过license
+
+我把vcs的安装文件都放在/home/ares/Tool/synopsys/ 里了，假如未来要改路径，就要改
+	~/Tool/synopsys/vcs/license/Synopsys.dat 
+	里面的
+	DAEMON snpslmd /home/ares/Tool/synopsys/scl/linux/bin/snpslmd 
+	的路径
+
+我的bashrc设了以下内容，未来如果换路径也要改这些：
+#dve
+export PATH=$PATH:/home/ares/Tool/synopsys/vcs/gui/dve/bin
+alias dve="dve -full64"
+
+#VCS
+export PATH=$PATH:/home/ares/Tool/synopsys/vcs/bin
+export VCS_HOME=/home/ares/Tool/synopsys/vcs
+alias vcs="vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed"
+
+
+#LICENCE
+export LM_LICENSE_FILE=27000@ares-XPS-8930
+alias lmg_vcs="lmgrd -c /home/ares/Tool/synopsys/vcs/license/Synopsys.dat"
+
+#scl
+export PATH=$PATH:/home/ares/Tool/synopsys/scl/linux/bin
+export VCS_ARCH_OVERRIDE=linux
+
+

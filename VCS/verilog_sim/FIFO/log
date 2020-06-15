@@ -1,0 +1,17 @@
+每一次跑以前必须先打lmg_vcs
+
+编译：
+如果只编译这些，就要把tb里的vcd那部分去掉！
+vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed *.v
+
+
+直接在dve里跑：
+ vcs *.v -debug_all -R -gui
+
+
+如果要生成vpd文件，就要有tb里的vcd那部分代码，并且用这个命令生成simv文件：
+vcs  -debug_pp +vcd+vcdpluson *.v
+
+跑一遍simv，得到vpd文件，
+最后，用dve打开这个vpd文件看波形：我这个例子生成的文件不叫inter.vpd！
+dve -vpd inter.vpd 
