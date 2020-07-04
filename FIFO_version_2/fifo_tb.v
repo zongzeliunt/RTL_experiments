@@ -1,4 +1,4 @@
-`timescale 1ns/10ps
+`timescale 1ns/1ns
 
 module fifo_test;
 	reg CLK;
@@ -109,6 +109,11 @@ end
 
 //clk, reset
 //{{{
+initial begin
+	$vcdplusfile("waveforms.vpd");
+	$vcdpluson();
+end
+
 initial begin
         CLK = 0;
         forever #10 CLK = ~CLK;
