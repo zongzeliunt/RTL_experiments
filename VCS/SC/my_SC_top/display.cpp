@@ -4,7 +4,7 @@
 void display::entry(){
 
   cout << "Cycle " << i << " for values A=" << value1.read() << " B=" << value2.read() << endl;
-  cout << "Results: A+B=" << add_result.read() << " A-B=" << endl << endl;
+  cout << "Results: A+B=" << add_result.read() << " Expect:" << value1.read() + value2.read() << endl;
 
   // Stop after 100 cycles
   i++;

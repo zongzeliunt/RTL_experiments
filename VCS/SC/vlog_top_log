@@ -1,0 +1,36 @@
+本log记录所有用SV TB 当top，里面有SC module的仿真的问题
+
+把这个文件：
+/home/ares/synopsys/vcs/include/systemc22/systemc_.h （systemc23的也要！）
+
+    换：
+    using std::gets;
+    成为：
+    #if defined(__cplusplus) && (__cplusplus < 201103L)
+    using std::gets;
+    #endif
+
+
+syscan -full64 -cpp g++-4.8 -cc gcc-4.8 -sysc=2.3 sc_add.cpp:sc_add
+    syscan 的目的是给systemc的module做一个verilog的wrapper，在公司机器一定要用-sysc=2.3，用vcs自带的systemc2.3
+    但是怎么用我自己装的systemc2.3(/usr/local/systemc-2.3) 暂时不清楚，假如搞懂了就一劳永逸了。
+
+
+vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed -sysc=2.3 top.v multiplier.v -timescale=1ps/1ps -l comp.log
+这里的-sysc=2.3也很必要
+
+
+原来的版本能过很有可能是因为我设了LD——LIBRARY——PATH=/usr/systemc了，而vcs又用了-LDFLAGS，阴差阳错给指向了/usr/systemc。用了我从外面搞来的systemc，就能过了！
+
+
+
+关于timescale：
+    我通用的SV TB 模板用的是-timescale=1ns/1ns，而SC的default用的是1ps，会导致冲突，在vcs命令里写-sysc=adjust_timeres可以让vcs找到最适合的timescale，也就是SV TB手工设置的1ns，会自动顶掉SC的1ps
+    用了-sysc=adjust_timeres以后，就不能在vcs的命令里写-timescale=1ns/1ns了
+    不加这个，执行simv的时候会报错，让我在SC里用sc_set_time_resolution，但是没找到最好的改动方法。VCS文档第706页有提及，但是不知道怎么用。
+
+
+
+
+
+
