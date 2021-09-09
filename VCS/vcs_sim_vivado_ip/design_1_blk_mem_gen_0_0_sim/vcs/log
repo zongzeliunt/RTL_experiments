@@ -1,0 +1,22 @@
+这是一个跑了一半的失败案例，为的是把vivado里面的ip抽出来用vcs单独跑行为仿真，不用vivado跑，结果就是被堵在了vcs版本上
+
+以后要玩哪个ip，只能用vivado去跑仿真了。
+
+1. 要用类似以下命令：
+    compile_simlib -directory ~/Tool/Xilinx_lib/ -family zynq -simulator vcs -library unisim -language verilog
+    来编译一个 xilinx的sim lib。参考：https://zhuanlan.zhihu.com/p/38623543
+
+    最大的问题就出在这步，因为2020版vivado只支持2020版vcs。所以编译不了。
+
+2. 声明完ip以后，vivado工程下会在此路径下出ip文件：
+        my_vivado_projects/zcu102/BRAM_research/BRAM_research.srcs/sources_1/bd/design_1/ip/design_1_blk_mem_gen_0_0
+    然后在vivado里可以在tcl下输入以下命令：
+        export_simulation -directory <output_directory> -simulator vcs -of_objects [get_files design_1_blk_mem_gen_0_0.xci]。参考：https://www.xilinx.com/support/answers/66533.html
+    如果不设dir，则会在ip相同路径下出现design_1_blk_mem_gen_0_0_sim文件夹。xci不需要输入全路径。
+
+3. sim文件夹生成后，会有sh文件，直接调用vcs编译。然而，里面会用的xil_defaultlib，假如没编译第一步的xilinx sim lib，则这个xil_defaultlib会找不到，所以出错。
+    sh文件里有写，需要
+        1. compile_simlib
+
+        2. 指定-lib_map_path，再跑export_simulation
+

@@ -1,0 +1,3 @@
+xpm_memory.sv,systemverilog,xpm,../../../../../../../../../../../Tool/Xilinx/Vivado/2020.2/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv,
+xpm_VCOMP.vhd,vhdl,xpm,../../../../../../../../../../../Tool/Xilinx/Vivado/2020.2/data/ip/xpm/xpm_VCOMP.vhd,
+glbl.v,Verilog,xil_defaultlib,glbl.v
