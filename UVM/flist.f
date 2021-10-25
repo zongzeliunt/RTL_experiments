@@ -1,6 +1,6 @@
 ./timescale.sv
 
-./dut.sv
+./dut.v
 
 ./my_driver.sv
 
