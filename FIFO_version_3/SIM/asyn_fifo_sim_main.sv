@@ -19,25 +19,21 @@ module asyn_fifo_sim_main #(
 
     //reg
 
-    reg w_reset;
-    reg r_reset;
-    reg w_clk = 1'b0;
-    reg r_clk = 1'b0;
+    reg reset;
+    reg clk = 1'b0;
    
     
     //声明一个 rtl_interface 类型的interface对象。这个对象的member signal都分配内存了，可以直接用rtl_interface.signal来看各个signal的值
     asyn_fifo_interface rtl_interface (
-        .w_clk            (w_clk),
-        .w_reset          (w_reset),
-        .r_clk            (r_clk),
-        .r_reset          (r_reset)
+        .clk            (clk),
+        .reset          (reset)
     );
 
 
     asyn_fifo #(
         .DATA_BITS (DATA_BITS),
         .FIFO_LENGTH (FIFO_LENGTH)
-    ) asyn_fifo_design (
+    ) addr_fifo (
         .rtl_interface(rtl_interface.rtl)
     );
     
@@ -51,55 +47,48 @@ module asyn_fifo_sim_main #(
 
 initial begin
     int i, j;
+    bit [DATA_BITS - 1 : 0] read_data;
 
-    @(posedge w_clk);
-    @(posedge w_clk);
-    while (w_reset == TB_RESET_VALUE) begin
-        @(posedge w_clk);
+
+    @(posedge clk);
+    @(posedge clk);
+    while (reset == TB_RESET_VALUE) begin
+        @(posedge clk);
     end
 
-    @(posedge w_clk);
-    @(posedge w_clk);
+    @(posedge clk);
+    @(posedge clk);
 
     for (i = 0; i < 10; i ++) begin
         asyn_fifo_driver.write_data(i);
     end
    
-end
-
-initial begin
-    int i, j;
-    bit [DATA_BITS - 1 : 0] read_data;
-
-    @(posedge r_clk);
-    @(posedge r_clk);
-    while (r_reset == TB_RESET_VALUE) begin
-        @(posedge r_clk);
-    end
-    
-    for (i = 0; i < 50; i ++) begin
-        @(posedge r_clk);
-    end
-
-   
     for (i = 0; i < 10; i ++) begin
         asyn_fifo_driver.read_data(read_data);
         $display ("read data: %x, expect: %x", read_data, i);
     end
+ 
+    @(posedge clk);
+    
+    for (i = 0; i < 10; i ++) begin
+        asyn_fifo_driver.write_data(i + 5);
+    end
+    
+    for (i = 0; i < 10; i ++) begin
+        asyn_fifo_driver.read_data(read_data);
+        $display ("read data: %x, expect: %x", read_data, i + 5);
+    end
+
+
 end
 
 
 //reset
 //{{{
 initial begin
-    w_reset = TB_RESET_VALUE;
-    r_reset = TB_RESET_VALUE;
+    reset = TB_RESET_VALUE;
     #20;
-    w_reset = ~TB_RESET_VALUE;
-    #1;
-    r_reset = ~TB_RESET_VALUE;
-    
-
+    reset = ~TB_RESET_VALUE;
     //messager.dump_message("sim start");
     //#500000;
     #1000;
@@ -108,29 +97,18 @@ initial begin
 end
 //}}}
 
-//w_clk
+//clk
 //{{{
 initial begin
-    w_clk = 0;
+    clk = 0;
     clock_counter = 0;
     ns_counter = 0;
     forever begin
-        #5 w_clk ^= 1;
+        #5 clk ^= 1;
         ns_counter += 5;
-        #5 w_clk ^= 1;
+        #5 clk ^= 1;
         ns_counter += 5;
         clock_counter += 1;
-    end
-end
-//}}}
-
-//r_clk
-//{{{
-initial begin
-    r_clk = 0;
-    forever begin
-        #7 r_clk ^= 1;
-        #7 r_clk ^= 1;
     end
 end
 //}}}

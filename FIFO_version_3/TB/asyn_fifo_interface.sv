@@ -5,10 +5,8 @@ interface asyn_fifo_interface #(
 
 ) (
 
-	input w_clk,
-	input w_reset,
-	input r_clk,
-	input r_reset
+	input clk,
+	input reset
     /*
     这是一种声明方式，可以用，但是我现在不想这么用。当然在SV code里的任何地方都可以用include svh的方式替换当前位置的代码。
 
@@ -28,10 +26,8 @@ interface asyn_fifo_interface #(
 
     modport rtl 
     (
-        input w_clk,
-        input w_reset,
-        input r_clk,
-        input r_reset,
+        input clk,
+        input reset,
         input input_data,
         output output_data,
         input read,
@@ -43,10 +39,8 @@ interface asyn_fifo_interface #(
 
     modport tb
     (
-        input w_clk,
-        input w_reset,
-        input r_clk,
-        input r_reset,
+        input clk,
+        input reset,
         output input_data,
         input output_data,
         output read,

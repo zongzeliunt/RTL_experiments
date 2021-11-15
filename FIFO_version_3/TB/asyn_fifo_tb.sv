@@ -36,7 +36,7 @@ class asyn_fifo_driver_class #(
         channel.write <= 1;
         //可以直接指派TB top module.clk，但是为了保证通用最好别这么做
         //@(posedge asyn_fifo_sim_main.clk);
-        @(posedge channel.w_clk);
+        @(posedge channel.clk);
         channel.input_data <= 10'b11_1111_1111;
         channel.write <= 0; 
     end
@@ -54,7 +54,7 @@ class asyn_fifo_driver_class #(
             channel.read <= 0;
         end
 
-        @(posedge channel.r_clk);
+        @(posedge channel.clk);
         channel.read <= 0;
         read_data = channel.output_data;//外面也能直接看output_data，意义其实不大。
     end
