@@ -1,3 +1,4 @@
+./timescale.sv
 
 ../TB/asyn_fifo_interface.sv
 

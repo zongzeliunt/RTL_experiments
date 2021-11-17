@@ -60,9 +60,9 @@ module asyn_fifo #
     //{{{
 	    //assign wgreynext = (wbinnext>>1) ^ wbinnext;
             //wgreynext就是wbinnext的格雷码计数器
-    grey_cnt #(
+    grey_converter #(
         .DATA_BIT(ADDR_BIT)
-    ) wgrey_cnt (
+    ) wgrey_conv (
         .bin_input (wbinnext),
         .grey_output (wgreynext)
     ); 
@@ -72,9 +72,9 @@ module asyn_fifo #
     //{{{
 	    //assign rgreynext = (rbinnext>>1) ^ rbinnext;
 	        //rgreynext就是rbinnext的格雷码计数器
-    grey_cnt #(
+    grey_converter #(
         .DATA_BIT(ADDR_BIT)
-    ) rgrey_cnt (
+    ) rgrey_conv (
         .bin_input (rbinnext),
         .grey_output (rgreynext)
     ); 

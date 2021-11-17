@@ -1,3 +1,4 @@
+
 longint unsigned ns_counter;
 longint unsigned clock_counter;
 module asyn_fifo_sim_main #(
@@ -39,9 +40,10 @@ module asyn_fifo_sim_main #(
         .rtl_interface(rtl_interface.rtl)
     );
     
-    asyn_fifo_driver_class #(
+    asyn_fifo_uvm_driver_class #(
     ) asyn_fifo_driver = new(
-        rtl_interface.tb
+        rtl_interface.tb,
+        null
     );
 
 
@@ -60,7 +62,7 @@ initial begin
     @(posedge w_clk);
 
     for (i = 0; i < 10; i ++) begin
-        asyn_fifo_driver.write_data(i);
+        asyn_fifo_driver.uvm_write_data(null);
     end
    
 end

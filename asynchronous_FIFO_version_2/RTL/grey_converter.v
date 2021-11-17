@@ -1,6 +1,6 @@
 `timescale 1 ns / 1 ps
 
-module grey_cnt #
+module grey_converter #
 (
     parameter DATA_BIT  = 4
 

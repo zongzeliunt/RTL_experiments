@@ -1,7 +1,5 @@
-`timescale 1 ns / 1 ps
-
 class asyn_fifo_driver_class #(
-
+//{{{
     parameter DATA_BITS	= 10,
     parameter FIFO_LENGTH	= 16,
 	parameter ADDR_BIT = 4
@@ -61,9 +59,8 @@ class asyn_fifo_driver_class #(
     endtask
     //}}}
 
-endclass  
 
-
-
+endclass 
+//}}} 
 
 
