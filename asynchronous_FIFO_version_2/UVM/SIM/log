@@ -1,0 +1,70 @@
+./simv +UVM_VERBOSITY=UVM_LOW +MEMLOAD=PRELOAD +define+ASIC +notimingcheck -l vcs_sim.log
+Notice: timing checks disabled with +notimingcheck at run-time
+Chronologic VCS simulator copyright 1991-2016
+Contains Synopsys proprietary information.
+Compiler version L-2016.06_Full64; Runtime version L-2016.06_Full64;  Dec 10 18:37 2021
+VCD+ Writer L-2016.06_Full64 Copyright (c) 1991-2016 by Synopsys Inc.
+*Verdi3* Loading libsscore_vcs201606.so
+*Verdi3* : FSDB_GATE is set.
+*Verdi3* : FSDB_RTL is set.
+*Verdi3* : Enable Parallel Dumping.
+FSDB Dumper for VCS, Release Verdi3_L-2016.06-1, Linux x86_64/64bit, 07/10/2016
+(C) 1996 - 2016 by Synopsys, Inc.
+*Verdi3* FSDB WARNING: The FSDB file already exists. Overwriting the FSDB file may crash the programs that are using this file.
+*Verdi3* : Create FSDB file 'waveforms.fsdb'
+*Verdi3* : Begin traversing the MDAs, layer (0).
+*Verdi3* : Enable +mda and +packedmda dumping.
+*Verdi3* : End of traversing the MDAs.
+*Verdi3* : Begin traversing the scopes, layer (0).
+*Verdi3* : End of traversing.
+UVM_INFO /home/ares/Tool/vcs_install/1800.2-2020-1.1/src/base/uvm_root.svh(440) @ 0: reporter [UVM/RELNOTES] 
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  This implementation of the UVM Library deviates from the 1800.2-2020
+  standard.  See the DEVIATIONS.md file contained in the release
+  for more details.
+
+----------------------------------------------------------------
+Accellera:1800.2-2020:UVM:1.1
+
+All copyright owners for this kit are listed in NOTICE.txt
+All Rights Reserved Worldwide
+----------------------------------------------------------------
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0: reporter [RNTST] Running test asyn_fifo_test...
+ARES test
+-----------------------------------------------------------------
+Name                     Type                         Size  Value
+-----------------------------------------------------------------
+uvm_test_top             asyn_fifo_test               -     @119 
+  m_asyn_fifo_tb         asyn_fifo_tb                 -     @172 
+    virtual_sequencer    asyn_fifo_virtual_sequencer  -     @183 
+      rsp_export         uvm_analysis_export          -     @192 
+      seq_item_export    uvm_seq_item_pull_imp        -     @310 
+      arbitration_queue  array                        0     -    
+      lock_queue         array                        0     -    
+      num_last_reqs      integral                     32    'd1  
+      num_last_rsps      integral                     32    'd1  
+-----------------------------------------------------------------
+UVM_INFO asyn_fifo_vir_seq_lib.sv(22) @ 0: uvm_test_top.m_asyn_fifo_tb.virtual_sequencer@@asyn_fifo_vseq [vesq] Doning asyn_fifo_vseq
+UVM_INFO /home/ares/Tool/vcs_install/1800.2-2020-1.1/src/base/uvm_report_server.svh(869) @ 0: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    3
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[UVM/RELNOTES]     1
+[vesq]     1
+
+$finish called from file "/home/ares/Tool/vcs_install/1800.2-2020-1.1/src/base/uvm_root.svh", line 578.
+$finish at simulation time                    0
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 0 ps
+CPU Time:      0.260 seconds;       Data structure size:   0.4Mb
+Fri Dec 10 18:37:15 2021
