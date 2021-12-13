@@ -1,5 +1,3 @@
-//https://verificationacademy.com/forums/uvm/error-macro-uvmobjectutils-undefined-errorundefined-variableuvmconfigdb-errornear-syntax-error-unexpected
-
 module Counter(clk,reset,data);
   input wire clk,reset;
   output reg [3:0] data;
@@ -192,6 +190,7 @@ class coverage extends uvm_subscriber # (counter_trans);
  
 typedef class scoreboard;
                    class counter_subscriber extends uvm_subscriber # (counter_trans);
+//{{{
          `uvm_component_utils(counter_subscriber)
     counter_trans  req;
  
@@ -207,8 +206,10 @@ typedef class scoreboard;
     endfunction
  
   endclass
+//}}}
+
 class scoreboard extends uvm_scoreboard;
- 
+//}}} 
         `uvm_component_utils(scoreboard)
  
   uvm_analysis_port # (counter_trans)  ap_objseq;
@@ -250,9 +251,11 @@ task run_phase();
           end
                 endtask
  
-      endclass
-          class agent extends uvm_agent;
- 
+endclass
+//}}}
+          
+class agent extends uvm_agent;
+//{{{ 
   `uvm_component_utils(agent)
  
   uvm_analysis_port # (counter_trans) ap_objseq;
@@ -297,10 +300,11 @@ function void connect_phase(uvm_phase phase);
   mtr.ap_objseq.connect(ap_objseq);
 endfunction
 endclass
-// environment defination
- 
+//}}}
+
+// environment defination 
 class environment extends uvm_env;
- 
+//{{{
   `uvm_component_utils(environment)
  
   uvm_analysis_port # (counter_trans)   ap_objseq;
@@ -331,7 +335,10 @@ class environment extends uvm_env;
   endfunction
  
 endclass
+//}}}
+
 class test_count extends uvm_test;
+//{{{
   `uvm_component_utils(test_count)
  
   environment env;
@@ -355,3 +362,4 @@ task run_phase(uvm_phase phase);
   endtask
  
 endclass
+//}}}

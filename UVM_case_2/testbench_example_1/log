@@ -1,0 +1,96 @@
+UVM_INFO @ 0: reporter [RNTST] Running test test...
+UVM_INFO testbench.sv(80) @ 0: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 290: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1b4b7ac9eb5a4b2b59eb5aeb1efa4f1efa0f1efb2f181">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0xa4 wr=0x0 wdata=0x9783 rdata=0x0
+UVM_INFO testbench.sv(80) @ 310: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 310: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6712110a38130214133813081749025749065749145727">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x1b wr=0x1 wdata=0x3025 rdata=0x0
+UVM_INFO testbench.sv(141) @ 330: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0xa4 wr=0x0 wdata=0x9783 rdata=0x1234
+<span class=code-hl-green>UVM_INFO testbench.sv(182) @ 330: uvm_test_top.e0.sb0 [scoreboard] PASS! First time read, addr=0xa4 exp=1234 act=0x1234</span>
+UVM_INFO testbench.sv(94) @ 330: uvm_test_top.e0.a0.d0 [DRV] Wait until ready is high
+UVM_INFO testbench.sv(141) @ 350: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x1b wr=0x1 wdata=0x3025 rdata=0x0
+UVM_INFO testbench.sv(172) @ 350: uvm_test_top.e0.sb0 [scoreboard] Store addr=0x1b wr=0x1 data=0x3025
+UVM_INFO testbench.sv(80) @ 350: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 350: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0277746f5d766771765d766d722c67322c63322c713242">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x9 wr=0x0 wdata=0x6169 rdata=0x0
+UVM_INFO testbench.sv(80) @ 370: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 370: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a7f7c67557e6f797e557e657a246f3a246b3a24793a4a">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x6e wr=0x0 wdata=0x2b4f rdata=0x0
+UVM_INFO testbench.sv(141) @ 390: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x9 wr=0x0 wdata=0x6169 rdata=0x1234
+<span class=code-hl-green>UVM_INFO testbench.sv(182) @ 390: uvm_test_top.e0.sb0 [scoreboard] PASS! First time read, addr=0x9 exp=1234 act=0x1234</span>
+UVM_INFO testbench.sv(94) @ 390: uvm_test_top.e0.a0.d0 [DRV] Wait until ready is high
+UVM_INFO testbench.sv(80) @ 410: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 410: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0673706b59726375725972697628633628673628753646">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x4a wr=0x1 wdata=0x8dd7 rdata=0x0
+UVM_INFO testbench.sv(141) @ 430: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x6e wr=0x0 wdata=0x2b4f rdata=0x1234
+<span class=code-hl-green>UVM_INFO testbench.sv(182) @ 430: uvm_test_top.e0.sb0 [scoreboard] PASS! First time read, addr=0x6e exp=1234 act=0x1234</span>
+UVM_INFO testbench.sv(94) @ 430: uvm_test_top.e0.a0.d0 [DRV] Wait until ready is high
+UVM_INFO testbench.sv(141) @ 450: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x4a wr=0x1 wdata=0x8dd7 rdata=0x0
+UVM_INFO testbench.sv(172) @ 450: uvm_test_top.e0.sb0 [scoreboard] Store addr=0x4a wr=0x1 data=0x8dd7
+UVM_INFO testbench.sv(80) @ 450: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 450: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7207041f2d061701062d061d025c17425c13425c014232">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x9d wr=0x0 wdata=0x8901 rdata=0x0
+UVM_INFO testbench.sv(80) @ 470: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 470: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8adaeb587acbdabac87acb7a8f6bde8f6b9e8f6abe898">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x66 wr=0x1 wdata=0x1cce rdata=0x0
+UVM_INFO testbench.sv(141) @ 490: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x9d wr=0x0 wdata=0x8901 rdata=0x1234
+<span class=code-hl-green>UVM_INFO testbench.sv(182) @ 490: uvm_test_top.e0.sb0 [scoreboard] PASS! First time read, addr=0x9d exp=1234 act=0x1234</span>
+UVM_INFO testbench.sv(94) @ 490: uvm_test_top.e0.a0.d0 [DRV] Wait until ready is high
+UVM_INFO testbench.sv(141) @ 510: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x66 wr=0x1 wdata=0x1cce rdata=0x0
+UVM_INFO testbench.sv(172) @ 510: uvm_test_top.e0.sb0 [scoreboard] Store addr=0x66 wr=0x1 data=0x1cce
+UVM_INFO testbench.sv(80) @ 510: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 510: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1762617a48637264634863786739722739762739642757">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0xa7 wr=0x1 wdata=0x493c rdata=0x0
+UVM_INFO testbench.sv(141) @ 530: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0xa7 wr=0x1 wdata=0x493c rdata=0x0
+UVM_INFO testbench.sv(172) @ 530: uvm_test_top.e0.sb0 [scoreboard] Store addr=0xa7 wr=0x1 data=0x493c
+UVM_INFO testbench.sv(80) @ 530: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 530: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0c797a615378697f785378637c22693c226d3c227f3c4c">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x5e wr=0x1 wdata=0xe4c rdata=0x0
+UVM_INFO testbench.sv(141) @ 550: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x5e wr=0x1 wdata=0xe4c rdata=0x0
+UVM_INFO testbench.sv(172) @ 550: uvm_test_top.e0.sb0 [scoreboard] Store addr=0x5e wr=0x1 data=0xe4c
+UVM_INFO testbench.sv(80) @ 550: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 550: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ce9eaf1c3e8f9efe8c3e8f3ecb2f9acb2fdacb2efacdc">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x8d wr=0x1 wdata=0x6bfe rdata=0x0
+UVM_INFO testbench.sv(141) @ 570: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x8d wr=0x1 wdata=0x6bfe rdata=0x0
+UVM_INFO testbench.sv(172) @ 570: uvm_test_top.e0.sb0 [scoreboard] Store addr=0x8d wr=0x1 data=0x6bfe
+UVM_INFO testbench.sv(80) @ 570: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 570: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="394c4f54664d5c4a4d664d5649175c09175809174a0979">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x32 wr=0x0 wdata=0x6252 rdata=0x0
+UVM_INFO testbench.sv(80) @ 590: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 590: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2b7b4af9db6a7b1b69db6adb2eca7f2eca3f2ecb1f282">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x4f wr=0x0 wdata=0xf148 rdata=0x0
+UVM_INFO testbench.sv(141) @ 610: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x32 wr=0x0 wdata=0x6252 rdata=0x1234
+<span class=code-hl-green>UVM_INFO testbench.sv(182) @ 610: uvm_test_top.e0.sb0 [scoreboard] PASS! First time read, addr=0x32 exp=1234 act=0x1234</span>
+UVM_INFO testbench.sv(94) @ 610: uvm_test_top.e0.a0.d0 [DRV] Wait until ready is high
+UVM_INFO testbench.sv(80) @ 630: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 630: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0a5a6bd8fa4b5a3a48fa4bfa0feb5e0feb1e0fea3e090">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0xe2 wr=0x0 wdata=0x18e0 rdata=0x0
+UVM_INFO testbench.sv(141) @ 650: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x4f wr=0x0 wdata=0xf148 rdata=0x1234
+<span class=code-hl-green>UVM_INFO testbench.sv(182) @ 650: uvm_test_top.e0.sb0 [scoreboard] PASS! First time read, addr=0x4f exp=1234 act=0x1234</span>
+UVM_INFO testbench.sv(94) @ 650: uvm_test_top.e0.a0.d0 [DRV] Wait until ready is high
+UVM_INFO testbench.sv(80) @ 670: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 670: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a9dcdfc4f6ddccdaddf6ddc6d987cc9987c89987da99e9">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0xec wr=0x0 wdata=0xd91a rdata=0x0
+UVM_INFO testbench.sv(141) @ 690: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0xe2 wr=0x0 wdata=0x18e0 rdata=0x1234
+<span class=code-hl-green>UVM_INFO testbench.sv(182) @ 690: uvm_test_top.e0.sb0 [scoreboard] PASS! First time read, addr=0xe2 exp=1234 act=0x1234</span>
+UVM_INFO testbench.sv(94) @ 690: uvm_test_top.e0.a0.d0 [DRV] Wait until ready is high
+UVM_INFO testbench.sv(80) @ 710: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 710: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3045465d6f445543446f445f401e55001e51001e430070">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x6e wr=0x1 wdata=0x31f6 rdata=0x0
+UVM_INFO testbench.sv(141) @ 730: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0xec wr=0x0 wdata=0xd91a rdata=0x1234
+<span class=code-hl-green>UVM_INFO testbench.sv(182) @ 730: uvm_test_top.e0.sb0 [scoreboard] PASS! First time read, addr=0xec exp=1234 act=0x1234</span>
+UVM_INFO testbench.sv(94) @ 730: uvm_test_top.e0.a0.d0 [DRV] Wait until ready is high
+UVM_INFO testbench.sv(141) @ 750: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x6e wr=0x1 wdata=0x31f6 rdata=0x0
+UVM_INFO testbench.sv(172) @ 750: uvm_test_top.e0.sb0 [scoreboard] Store addr=0x6e wr=0x1 data=0x31f6
+UVM_INFO testbench.sv(80) @ 750: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 750: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a6f6c77456e7f696e456e756a347f2a347b2a34692a5a">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x66 wr=0x0 wdata=0x2374 rdata=0x0
+UVM_INFO testbench.sv(80) @ 770: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 770: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aadfdcc7f5decfd9def5dec5da84cf9a84cb9a84d99aea">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0xd5 wr=0x1 wdata=0xad94 rdata=0x0
+UVM_INFO testbench.sv(141) @ 790: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x66 wr=0x0 wdata=0x2374 rdata=0x1cce
+<span class=code-hl-green>UVM_INFO testbench.sv(189) @ 790: uvm_test_top.e0.sb0 [scoreboard] PASS! addr=0x66 exp=0x1cce act=0x1cce</span>
+UVM_INFO testbench.sv(94) @ 790: uvm_test_top.e0.a0.d0 [DRV] Wait until ready is high
+UVM_INFO testbench.sv(141) @ 810: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0xd5 wr=0x1 wdata=0xad94 rdata=0x0
+UVM_INFO testbench.sv(172) @ 810: uvm_test_top.e0.sb0 [scoreboard] Store addr=0xd5 wr=0x1 data=0xad94
+UVM_INFO testbench.sv(80) @ 810: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 810: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81f4f7ecdef5e4f2f5def5eef1afe4b1afe0b1aff2b1c1">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0xbb wr=0x1 wdata=0xd056 rdata=0x0
+UVM_INFO testbench.sv(141) @ 830: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0xbb wr=0x1 wdata=0xd056 rdata=0x0
+UVM_INFO testbench.sv(172) @ 830: uvm_test_top.e0.sb0 [scoreboard] Store addr=0xbb wr=0x1 data=0xd056
+UVM_INFO testbench.sv(80) @ 830: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 830: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb9e9d86b49f8e989fb49f849bc58edbc58adbc598dbab">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0x18 wr=0x0 wdata=0x8bba rdata=0x0
+UVM_INFO testbench.sv(80) @ 850: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(52) @ 850: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8afffce7d5feeff9fed5fee5faa4efbaa4ebbaa4f9baca">[email&#160;protected]</a>@seq [SEQ] Generate new item: addr=0xec wr=0x1 wdata=0xdfc1 rdata=0x0
+UVM_INFO testbench.sv(141) @ 870: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0x18 wr=0x0 wdata=0x8bba rdata=0x1234
+<span class=code-hl-green>UVM_INFO testbench.sv(182) @ 870: uvm_test_top.e0.sb0 [scoreboard] PASS! First time read, addr=0x18 exp=1234 act=0x1234</span>
+UVM_INFO testbench.sv(94) @ 870: uvm_test_top.e0.a0.d0 [DRV] Wait until ready is high
+UVM_INFO testbench.sv(141) @ 890: uvm_test_top.e0.a0.m0 [monitor] Monitor found packet addr=0xec wr=0x1 wdata=0xdfc1 rdata=0x0
+UVM_INFO testbench.sv(172) @ 890: uvm_test_top.e0.sb0 [scoreboard] Store addr=0xec wr=0x1 data=0xdfc1
+UVM_INFO testbench.sv(80) @ 890: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(55) @ 890: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d686b704269786e694269726d33782d337c2d336e2d5d">[email&#160;protected]</a>@seq [SEQ] Done generation of 20 items
+UVM_INFO /playground_lib/uvm-1.2/src/base/uvm_objection.svh(1271) @ 1090: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO /playground_lib/uvm-1.2/src/base/uvm_report_server.svh(847) @ 1090: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---

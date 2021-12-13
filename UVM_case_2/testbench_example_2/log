@@ -1,0 +1,120 @@
+UVM_INFO @ 0: reporter [RNTST] Running test test...
+UVM_INFO testbench.sv(78) @ 0: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(49) @ 290: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f085869daf84958384af849f80de95c0de91c0de83c0b0">[email&#160;protected]</a>@seq [SEQ] Generate new item: 
+---------------------------------------------------------------------------
+Name                           Type         Size  Value                    
+---------------------------------------------------------------------------
+m_item                         switch_item  -     @2847                    
+  addr                         integral     8     'he6                     
+  data                         integral     16    'h9248                   
+  addr_a                       integral     8     'h0                      
+  data_a                       integral     16    'h0                      
+  addr_b                       integral     8     'h0                      
+  data_b                       integral     16    'h0                      
+  begin_time                   time         64    290                      
+  depth                        int          32    'd2                      
+  parent sequence (name)       string       3     seq                      
+  parent sequence (full name)  string       25    uvm_test_top.e0.a0.s0.seq
+  sequencer                    string       21    uvm_test_top.e0.a0.s0    
+---------------------------------------------------------------------------
+UVM_INFO testbench.sv(139) @ 310: uvm_test_top.e0.a0.m0 [MON] T=310 [Monitor] Thread0 First part over
+UVM_INFO testbench.sv(78) @ 310: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(49) @ 310: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5a2f2c37052e3f292e052e352a743f6a743b6a74296a1a">[email&#160;protected]</a>@seq [SEQ] Generate new item: 
+---------------------------------------------------------------------------
+Name                           Type         Size  Value                    
+---------------------------------------------------------------------------
+m_item                         switch_item  -     @2890                    
+  addr                         integral     8     'h88                     
+  data                         integral     16    'h8675                   
+  addr_a                       integral     8     'h0                      
+  data_a                       integral     16    'h0                      
+  addr_b                       integral     8     'h0                      
+  data_b                       integral     16    'h0                      
+  begin_time                   time         64    310                      
+  depth                        int          32    'd2                      
+  parent sequence (name)       string       3     seq                      
+  parent sequence (full name)  string       25    uvm_test_top.e0.a0.s0.seq
+  sequencer                    string       21    uvm_test_top.e0.a0.s0    
+---------------------------------------------------------------------------
+UVM_INFO testbench.sv(183) @ 330: uvm_test_top.e0.sb0 [SCBD] PASS! Match addr=0xe6 data=0x9248 addr_b=0xe6 data_b=0x9248
+UVM_INFO testbench.sv(148) @ 330: uvm_test_top.e0.a0.m0 [MON] T=330 [Monitor] Thread0 Second part over, item:
+--------------------------------------
+Name         Type         Size  Value 
+--------------------------------------
+switch_item  switch_item  -     @2911 
+  addr       integral     8     'he6  
+  data       integral     16    'h9248
+  addr_a     integral     8     'h0   
+  data_a     integral     16    'h0   
+  addr_b     integral     8     'he6  
+  data_b     integral     16    'h9248
+--------------------------------------
+UVM_INFO testbench.sv(78) @ 330: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(139) @ 330: uvm_test_top.e0.a0.m0 [MON] T=330 [Monitor] Thread1 First part over
+UVM_INFO testbench.sv(49) @ 330: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a1d4d7ccfed5c4d2d5fed5ced18fc4918fc0918fd291e1">[email&#160;protected]</a>@seq [SEQ] Generate new item: 
+---------------------------------------------------------------------------
+Name                           Type         Size  Value                    
+---------------------------------------------------------------------------
+m_item                         switch_item  -     @2928                    
+  addr                         integral     8     'hcc                     
+  data                         integral     16    'h6ed0                   
+  addr_a                       integral     8     'h0                      
+  data_a                       integral     16    'h0                      
+  addr_b                       integral     8     'h0                      
+  data_b                       integral     16    'h0                      
+  begin_time                   time         64    330                      
+  depth                        int          32    'd2                      
+  parent sequence (name)       string       3     seq                      
+  parent sequence (full name)  string       25    uvm_test_top.e0.a0.s0.seq
+  sequencer                    string       21    uvm_test_top.e0.a0.s0    
+---------------------------------------------------------------------------
+UVM_INFO testbench.sv(183) @ 350: uvm_test_top.e0.sb0 [SCBD] PASS! Match addr=0x88 data=0x8675 addr_b=0x88 data_b=0x8675
+UVM_INFO testbench.sv(148) @ 350: uvm_test_top.e0.a0.m0 [MON] T=350 [Monitor] Thread1 Second part over, item:
+--------------------------------------
+Name         Type         Size  Value 
+--------------------------------------
+switch_item  switch_item  -     @2893 
+  addr       integral     8     'h88  
+  data       integral     16    'h8675
+  addr_a     integral     8     'h0   
+  data_a     integral     16    'h0   
+  addr_b     integral     8     'h88  
+  data_b     integral     16    'h8675
+--------------------------------------
+UVM_INFO testbench.sv(78) @ 350: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(139) @ 350: uvm_test_top.e0.a0.m0 [MON] T=350 [Monitor] Thread0 First part over
+UVM_INFO testbench.sv(49) @ 350: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1065667d4f647563644f647f603e75203e71203e632050">[email&#160;protected]</a>@seq [SEQ] Generate new item: 
+---------------------------------------------------------------------------
+Name                           Type         Size  Value                    
+---------------------------------------------------------------------------
+m_item                         switch_item  -     @2950                    
+  addr                         integral     8     'hb2                     
+  data                         integral     16    'h4b58                   
+  addr_a                       integral     8     'h0                      
+  data_a                       integral     16    'h0                      
+  addr_b                       integral     8     'h0                      
+  data_b                       integral     16    'h0                      
+  begin_time                   time         64    350                      
+  depth                        int          32    'd2                      
+  parent sequence (name)       string       3     seq                      
+  parent sequence (full name)  string       25    uvm_test_top.e0.a0.s0.seq
+  sequencer                    string       21    uvm_test_top.e0.a0.s0    
+---------------------------------------------------------------------------
+UVM_INFO testbench.sv(183) @ 370: uvm_test_top.e0.sb0 [SCBD] PASS! Match addr=0xcc data=0x6ed0 addr_b=0xcc data_b=0x6ed0
+UVM_INFO testbench.sv(148) @ 370: uvm_test_top.e0.a0.m0 [MON] T=370 [Monitor] Thread0 Second part over, item:
+--------------------------------------
+Name         Type         Size  Value 
+--------------------------------------
+switch_item  switch_item  -     @2872 
+  addr       integral     8     'hcc  
+  data       integral     16    'h6ed0
+  addr_a     integral     8     'h0   
+  data_a     integral     16    'h0   
+  addr_b     integral     8     'hcc  
+  data_b     integral     16    'h6ed0
+--------------------------------------
+UVM_INFO testbench.sv(78) @ 370: uvm_test_top.e0.a0.d0 [DRV] Wait for item from sequencer
+UVM_INFO testbench.sv(139) @ 370: uvm_test_top.e0.a0.m0 [MON] T=370 [Monitor] Thread1 First part over
+UVM_INFO testbench.sv(53) @ 370: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6015160d3f140513143f140f104e05504e01504e135020">[email&#160;protected]</a>@seq [SEQ] Done generation of 4 items
+UVM_INFO /playground_lib/uvm-1.2/src/base/uvm_objection.svh(1271) @ 370: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO /playground_lib/uvm-1.2/src/base/uvm_report_server.svh(847) @ 370: reporter [UVM/REPORT/SERVER] 
