@@ -1,10 +1,10 @@
 
 Note-[RT_BS] Larger stack needed
-  Note: Bumping stack limit from 8192 to 8250 Kbytes.
+  Note: Bumping stack limit from 8192 to 8196 Kbytes.
 
 Chronologic VCS simulator copyright 1991-2016
 Contains Synopsys proprietary information.
-Compiler version L-2016.06_Full64; Runtime version L-2016.06_Full64;  Dec 12 17:30 2021
+Compiler version L-2016.06_Full64; Runtime version L-2016.06_Full64;  Dec 14 13:48 2021
 UVM_INFO /home/ares/Tool/vcs_install/1800.2-2020-1.1/src/base/uvm_root.svh(440) @ 0: reporter [UVM/RELNOTES] 
   ***********       IMPORTANT RELEASE NOTES         ************
 
@@ -36,6 +36,10 @@ FSDB Dumper for VCS, Release Verdi3_L-2016.06-1, Linux x86_64/64bit, 07/10/2016
 *Verdi3* : End of traversing the MDAs.
 *Verdi3* : Begin traversing the scopes, layer (0).
 *Verdi3* : End of traversing.
+ARES env build_phase
+ARES agent build_phase
+ARES agent connect_phase
+ARES env connect_phase
 UVM_INFO tb/scoreboard.sv(33) @ 90000: uvm_test_top.e0.sb0 [SCBD] in=0 out=0 ref=0b1011 act=0b0
 UVM_INFO tb/scoreboard.sv(33) @ 110000: uvm_test_top.e0.sb0 [SCBD] in=0 out=0 ref=0b1011 act=0b0
 UVM_INFO tb/scoreboard.sv(33) @ 130000: uvm_test_top.e0.sb0 [SCBD] in=0 out=0 ref=0b1011 act=0b0
@@ -521,5 +525,5 @@ $finish called from file "/home/ares/Tool/vcs_install/1800.2-2020-1.1/src/base/u
 $finish at simulation time              8590000
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 8590000 ps
-CPU Time:      0.290 seconds;       Data structure size:   0.3Mb
-Sun Dec 12 17:30:09 2021
+CPU Time:      0.270 seconds;       Data structure size:   0.3Mb
+Tue Dec 14 13:48:09 2021

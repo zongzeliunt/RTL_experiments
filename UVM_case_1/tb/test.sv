@@ -15,7 +15,10 @@ class test_count extends uvm_test;
         super.build_phase(phase);
         env = environment::type_id::create("env",this);
         req = count_seq::type_id::create("req");
-        req.randomize();
+        //ARES
+        //req.randomize();
+        req.randomize() with { num inside {[300:500]}; };
+
     endfunction
  
     //  task run_test(uvm_phase phase);

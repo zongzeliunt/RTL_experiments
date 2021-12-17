@@ -1,0 +1,194 @@
+tb_top.sv
+tb_top
+    uvm_config_db#(virtual des_if)::set(null, "uvm_test_top", "des_vif", _if);
+        这个应该是在声明interface
+    run_test("test_1011")
+    
+test.sv:
+{{{
+    class base_test extends uvm_test;
+        env e0
+        gen_item_seq 		seq;
+            gen_item_seq 就是sequence
+ 
+        run_phase 它应该是开头
+            apply_reset 用这个做reset
+            
+            seq.start(e0.a0.s0);
+                这是在start env.agent.sequencer
+
+    class test_1011 extends base_test;
+        virtual function void build_phase(uvm_phase phase); 
+            super.build_phase(phase); 
+                这个super是base_test，
+            seq.randomize() with { num inside {[300:500]}; };
+                seq里有个num, 这个东西大概就是在给random的生成这个num，范围在300到500之间。
+                这大概可以解释为什么我用别人写的那个，里面的num没有生成。
+
+
+
+
+}}}
+
+env.sv:
+{{{
+    class env extends uvm_env;
+        agent a0
+        scoreboard sb0
+
+        virtual function void build_phase(uvm_phase phase);
+            好理解
+
+        virtual function void connect_phase(uvm_phase phase);
+            在这里把agent的monitor的mon_analysis_port连到了scoreboard的m_analysis_imp上了
+
+
+}}}
+
+agent.sv:
+{{{
+    class agent extends uvm_agent;
+        driver 		d0; 		
+        monitor 		m0; 
+        uvm_sequencer #(Item)	s0;
+    
+        virtual function void connect_phase(uvm_phase phase);
+            d0.seq_item_port.connect(s0.seq_item_export);
+                应该是把uvm_sequencer的sequence输出接到driver的item_port上
+
+                 
+
+
+}}}
+
+driver.sv:
+{{{
+    首先在agent里要把sequencer的 seq_item_export 连上
+        d0.seq_item_port.connect(s0.seq_item_export);
+    然后在driver里一个一个的从里面取item
+    
+    class driver extends uvm_driver #(Item);              
+        virtual task run_phase(uvm_phase phase);
+            seq_item_port.get_next_item(m_item);
+            drive_item(m_item);
+            seq_item_port.item_done();
+        
+        virtual task drive_item(Item m_item);
+            @(vif.cb);
+                这种玩法仅在这里出现过，我也不确定这个是不是最合理。
+}}}
+
+monitor.sv:
+{{{
+    class monitor extends uvm_monitor;
+        uvm_analysis_port  #(Item) mon_analysis_port;
+            uvm_analysis_port不知道是个什么东西，大概不简单，因为它后面还有个叫write的内联函数。
+            在env里被连到了scoreboard的m_analysis_imp上。
+            scoreboard 定义了一个write函数，我的理解是monitor call的write函数其实是scoreboard定义的那个，目的是把item传进去
+
+            Item 是sequence_item
+
+        virtual function void build_phase(uvm_phase phase);
+            if (!uvm_config_db#(virtual des_if)::get(this, "", "des_vif", vif))
+                tb_top.sv 里是set interface，这里是get它，如果没get到则报错
+
+}}}
+
+sequencer:
+{{{
+    整个design里没有sequencer这个东西，但是在agent里是有个 
+        uvm_sequencer #(Item)	s0;
+    这么个东西的，这个东西会被接在driver上。
+}}}
+
+sequence.sv:
+{{{
+    class gen_item_seq extends uvm_sequence;
+        rand int num; 	// Config total number of items to be sent
+      
+        constraint c1 { soft num inside {[10:50]}; }
+            这句不知道什么意思，可能是不管外面生成的num再大，这里都要把它定回到10:50
+
+            test.sv里 seq.randomize() with { num inside {[300:500]}; }; 给这个sequence生成了num
+
+        
+        virtual task body();
+    	    start_item(m_item);
+      	    finish_item(m_item);
+                个人感觉是，sequence在test里被实例化后，会调用这个body。body在不停的生产Item，生产一个start_item以下它。这个时候agent里的uvm_sequencer会收到这个Item。
+                由于agent里把uvm_sequencer s0.seq_item_export接到了driver d0.seq_item_port上了.seq_item_port只要get_next_item到了一个Item类型数据m_item就做drive。
+}}}
+
+scoreboard.sv
+    class scoreboard extends uvm_scoreboard;
+        
+        uvm_analysis_imp #(Item, scoreboard) m_analysis_imp;
+            在env里被连到了agent的monitor的mon_analysis_port
+
+
+        virtual function write(Item item);                
+            monitor通过write函数把item传进来，在这里做比对，item的in作为产生exp_out的依据，和item.out比对，有问题则报uvm_error，无问题则报uvm_info
+
+
+interface.sv:
+    不用看
+
+sequence_item.sv：
+    不用看
+
+
+
+
+
+另注，都是猜想：
+    1. 内联函数：
+    {{{
+        build_phase
+            {{{
+            build_phase 估计是每个class的构造函数，只要声明一个class类的对象，就要call一下这个build_phase。
+                ARES test_1011 build_phase
+                ARES base_test build_phase
+                ARES base_test run_phase
+            根据上面这三个message可以发现，先call test_1011 的build_phase，再call test_1011 的parent的build_phase，再call test_1011 继承下来的run_phase
+            }}}
+
+        connect_phase
+        {{{
+            env里有connect_phase，在这里call了super（uvm_env）的connect_phase，结合上面的build_phase可以猜想，只要有一个class被实例化了，那么这个class的connect_phase 和build_phase都会被call
+                ARES env build_phase
+                ARES agent build_phase
+                ARES agent connect_phase
+                ARES env connect_phase
+            调用顺序可知道，先env build_phase，在build_phase 里实例化了agent，则call agent的build_phase和connect_phase，再env的connect_phase
+        }}}
+
+        由此可见内联函数调用顺序：
+            build_phase
+            connect_phase
+            run_phase
+           
+    }}} 
+
+
+    2. class 的实例化方法：
+    {{{
+        test.sv: 
+            e0 = env::type_id::create("e0", this);
+            seq = gen_item_seq::type_id::create("seq");
+        
+        env.sv:
+            a0 = agent::type_id::create("a0", this);
+            sb0 = scoreboard::type_id::create("sb0", this);
+        只要一实例化，肯定call  build_phase， 有connect_phase的call connect_phase
+    }}}
+
+    3. scoreboard 的 uvm_analysis_imp m_analysis_imp和
+        monitor 的 uvm_analysis_port mon_analysis_port
+        在env里，这两个东西被连在了一起，它们都有write函数，monitor一write，scoreboard就收到了。
+        当然，我也可以认为这个write函数其实本来是个虚函数。monitor call 的这个write （mon_analysis_port.write(item)）其实call的就是scoreboard的这个write函数。目的就是把这个item传给scoreboard。
+    
+
+            
+计划：
+    1. 可能interface 和driver要重写，毕竟@(vif.cb)这个玩法第一次见。
+        monitor也在用@ (vif.cb)来pass clk，搞不好要一块重写。

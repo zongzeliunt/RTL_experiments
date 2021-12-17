@@ -9,7 +9,7 @@ class agent extends uvm_agent;
     counter_sequencer        sqr;
     driver       drv;
     monitor      mtr;
-    scoreboard   sb;
+    //scoreboard   sb;
     //coverage     cov;
  
     function new(string name, uvm_component parent=null);
@@ -22,7 +22,7 @@ class agent extends uvm_agent;
         ap_objseq = new(.name("ap_objseq"),.parent(this));
         drv = driver::type_id::create("drv",this);
         mtr = monitor::type_id::create("mtr",this);
-        sb = scoreboard::type_id::create("sb",this);
+        //sb = scoreboard::type_id::create("sb",this);
         //cov = coverage::type_id::create("cov",this);
         sqr = counter_sequencer::type_id::create("sqr",this);
  

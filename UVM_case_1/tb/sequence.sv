@@ -20,6 +20,7 @@ class count_seq extends uvm_sequence#(counter_trans);
     endfunction
  
     task body     ();
+        $display ("ARES num: %d", num);
         for (int i = 0; i < num; i ++) begin
             counter_trans  req = counter_trans::type_id::create("req");
             //start_item( req.randomize() );

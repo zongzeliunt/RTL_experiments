@@ -3,8 +3,9 @@
 class environment extends uvm_env;
 //{{{
     `uvm_component_utils(environment)
- 
-    uvm_analysis_port # (counter_trans)   ap_objseq;
+    
+    //ARES 大概没用
+    //uvm_analysis_port # (counter_trans)   ap_objseq;
  
     agent agt;
     //coverage cov;
@@ -27,10 +28,21 @@ class environment extends uvm_env;
  
     function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
-        //agt.ap_objseq.connect(cov.analysis_export);
         //ARES
+        //agt.ap_objseq.connect(cov.analysis_export);
         //agt.ap_objseq.connect(sb.analysis_export);
         //agt.ap_objseq.connect(count_sub.analysis_export);
+
+
+        //cov.analysis_export.connect(agt.ap_objseq);
+        //sb.ap_objseq.connect(agt.ap_objseq);
+        //count_sub.analysis_export.connect(agt.ap_objseq);
+
+
+        agt.ap_objseq.connect(sb.ap_objseq);
+        //agt.ap_objseq.connect(count_sub.ap_objseq);
+
+
     endfunction
 endclass
 //}}}

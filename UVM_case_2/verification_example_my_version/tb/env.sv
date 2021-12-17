@@ -9,18 +9,15 @@ class env extends uvm_env;
     endfunction
     
     agent 		a0; 		// Agent handle
-    scoreboard	sb0; 		// Scoreboard handle
         
     virtual function void build_phase(uvm_phase phase);
         $display ("ARES env build_phase");
         super.build_phase(phase);
         a0 = agent::type_id::create("a0", this);
-        sb0 = scoreboard::type_id::create("sb0", this);
     endfunction
     
     virtual function void connect_phase(uvm_phase phase);
         $display ("ARES env connect_phase");
         super.connect_phase(phase);
-        a0.m0.mon_analysis_port.connect(sb0.m_analysis_imp);
     endfunction
 endclass

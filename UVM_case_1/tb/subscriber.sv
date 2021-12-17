@@ -2,6 +2,7 @@
 class counter_subscriber extends uvm_subscriber # (counter_trans);
 //{{{
     `uvm_component_utils(counter_subscriber)
+    uvm_analysis_port # (counter_trans) ap_objseq;
     counter_trans  req;
  
     function new (string name, uvm_component parent=null);
