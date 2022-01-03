@@ -10,7 +10,7 @@ module asyn_fifo #
 )
 (
 
-    asyn_fifo_interface.rtl rtl_interface
+    des_if.rtl rtl_interface
 
 
 );
@@ -21,7 +21,7 @@ module asyn_fifo #
 
     //reg
 	reg [DATA_BITS - 1 : 0] data_array[FIFO_LENGTH - 1: 0];
-	reg flap;
+	//reg flap;
 	reg [ADDR_BIT - 1:0] write_addr;
 	reg [ADDR_BIT - 1:0] read_addr;
 	

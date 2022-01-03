@@ -1,0 +1,76 @@
+
+Note-[RT_BS] Larger stack needed
+  Note: Bumping stack limit from 8192 to 8196 Kbytes.
+
+Chronologic VCS simulator copyright 1991-2016
+Contains Synopsys proprietary information.
+Compiler version L-2016.06_Full64; Runtime version L-2016.06_Full64;  Dec 17 17:37 2021
+VCD+ Writer L-2016.06_Full64 Copyright (c) 1991-2016 by Synopsys Inc.
+*Verdi3* Loading libsscore_vcs201606.so
+*Verdi3* : FSDB_GATE is set.
+*Verdi3* : FSDB_RTL is set.
+*Verdi3* : Enable Parallel Dumping.
+FSDB Dumper for VCS, Release Verdi3_L-2016.06-1, Linux x86_64/64bit, 07/10/2016
+(C) 1996 - 2016 by Synopsys, Inc.
+*Verdi3* FSDB WARNING: The FSDB file already exists. Overwriting the FSDB file may crash the programs that are using this file.
+*Verdi3* : Create FSDB file 'waveforms.fsdb'
+*Verdi3* : Begin traversing the MDAs, layer (0).
+*Verdi3* : Enable +mda and +packedmda dumping.
+*Verdi3* : End of traversing the MDAs.
+*Verdi3* : Begin traversing the scopes, layer (0).
+*Verdi3* : End of traversing.
+UVM_INFO /home/ares/Tool/vcs_install/1800.2-2020-1.1/src/base/uvm_root.svh(440) @ 0: reporter [UVM/RELNOTES] 
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  This implementation of the UVM Library deviates from the 1800.2-2020
+  standard.  See the DEVIATIONS.md file contained in the release
+  for more details.
+
+----------------------------------------------------------------
+Accellera:1800.2-2020:UVM:1.1
+
+All copyright owners for this kit are listed in NOTICE.txt
+All Rights Reserved Worldwide
+----------------------------------------------------------------
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0: reporter [RNTST] Running test asyn_fifo_test...
+ARES test build phase
+ARES num =         406
+ARES this is testcase body
+ARES this is testcase send_w
+ARES this is testcase send_r
+ARES this is testcase body
+ARES this is testcase send_w
+ARES this is testcase send_r
+ARES this is testcase body
+ARES this is testcase send_w
+ARES this is testcase send_r
+ARES this is testcase body
+ARES this is testcase send_w
+ARES this is testcase send_r
+ARES this is testcase body
+ARES this is testcase send_w
+ARES this is testcase send_r
+UVM_INFO ../TB/sequence.sv(22) @ 10000: uvm_test_top.e0.a0.s0@@seq [SEQ] Done generation of 5 items
+sim start
+UVM_INFO /home/ares/Tool/vcs_install/1800.2-2020-1.1/src/base/uvm_report_server.svh(869) @ 210000: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    3
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[SEQ]     1
+[UVM/RELNOTES]     1
+
+$finish called from file "/home/ares/Tool/vcs_install/1800.2-2020-1.1/src/base/uvm_root.svh", line 578.
+$finish at simulation time               210000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 210000 ps
+CPU Time:      0.250 seconds;       Data structure size:   0.3Mb
+Fri Dec 17 17:37:20 2021
