@@ -1,0 +1,23 @@
+这个算简化版本，但是里面该有的都有：
+具体UVM工作方式参考：
+    ~/local_git_clone/RTL_experiments/UVM_case_2/verification_example/research_log
+
+在SIM里run test
+    用uvm_top.sv生成clk，reset，声明interface，连接tb和rtl，没了。
+
+    run_test 应该是一个UVM的函数，里面那个asyn_fifo_test是在test.sv里定义的class
+
+TB:
+    test.sv
+        asyn_fifo_test
+            generate num,
+    sequence.sv:
+        receive the num, run `uvm_do(m_test_case)
+
+    test_case:
+        run send_w(), send_r()
+
+    driver:
+        run get_req, receive item and push to queue
+        run run_w_req and run_r_req
+     
