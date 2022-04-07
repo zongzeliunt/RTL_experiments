@@ -1,6 +1,6 @@
 `timescale 1 ns / 1 ps
 
-interface asyn_fifo_interface #(
+interface des_if #(
     parameter integer DATA_BITS	= 10
 
 ) (

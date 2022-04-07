@@ -35,7 +35,7 @@ module asyn_fifo_sim_main #(
    
     
     //声明一个 rtl_interface 类型的interface对象。这个对象的member signal都分配内存了，可以直接用rtl_interface.signal来看各个signal的值
-    asyn_fifo_interface rtl_interface (
+    des_if rtl_interface (
         .w_clk            (w_clk),
         .w_reset          (w_reset),
         .r_clk            (r_clk),
@@ -124,7 +124,7 @@ end
 //}}}
 
 initial begin
-    uvm_config_db#(virtual interface asyn_fifo_interface)::set(uvm_root::get(), "*", "rtl_vif", rtl_interface);
+    uvm_config_db#(virtual interface des_if)::set(uvm_root::get(), "*", "rtl_vif", rtl_interface);
     run_test("asyn_fifo_test");
 end
 

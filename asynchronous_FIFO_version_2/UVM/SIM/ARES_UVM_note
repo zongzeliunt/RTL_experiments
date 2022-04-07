@@ -1,0 +1,706 @@
+https://docs.google.com/document/d/11Kja3_t0prt90NA21JyiyfP5m5NT6hwG/edit?pli=1
+
+union_ctrl:
+pulpine
+    union_ctrl
+        uvc                 #里面是UVM验证组件,现有的uvm验证组件，平台中使用，目前只有一个axi组件；
+        union_ctrl_env      #全芯片验证平台
+            sv              #验证平台主体
+            tb              #里面两个子文件union_ctrl_top.sv,union_ctrl_tb.sv
+        testcase
+            cases
+                test.sv     #test.sv形式具体详见union_ctrl/testcase/DmaRegTest/test.sv样例编写。所有用例编写按照标准格式，存放于testcase目录下
+        rsim                仿真工作目录，run脚本存在于此目录下，在此目录下执行仿真、验证；
+            run scripts
+            flist.f
+            fsdb,etc
+
+跑他的：
+{{{
+跑仿真路径：union_ctrl/rsim
+    跑单个仿真: rsim>./run –t DmaRegTest –debug verdi
+        命令表示的是仿真DmaRegTest这个用例，并且仿真完后，自动调用Verdi进行波形查看，debug。用例默认在testcase目录下一层，用例支持多层路径，调用时需指明，比如testcase目录下，对dmac用例建立一个目录，下面包含多个用例，则要运行dmac的用例test1，输入如下命令即可。
+        rsim>./run –t damc/test1 –debug verdi
+
+    批处理（跑一堆仿真）：rsim>./run –tf testcase.list
+    查看代码命令：rsim>./run –v verdi
+    help: sim>./run –h
+        帮助显示，有具体参数的用法，后续会根据具体需求添加其它参数。实际我们输入一个仿真命令，脚本会对仿真命令参数进行解析，并执行对应的仿真流程。
+sim>
+}}}
+
+
+我自己跑的：
+{{{
+    rm -rf csrc simv.dair ; ./run -t NpuMemRwTest6  -debug verdi
+dve 看coverage report：
+    dve -full64 -cov -dir cov_dir/NpuMemRwTest6.vdb/
+印象中文博说verdi 看不了coverage，因为没有license，用dve也一样可以看。
+}}}
+
+UVM 文件结构：
+    这里仅列出，使用方法写在后面，分析一个在后面写一个介绍
+{{{
+    axi:
+        master
+            agent
+            driver
+            monitor
+            recorder
+            sequencer
+        slave
+            agent
+            driver
+            monitor
+            recorder
+            sequencer   
+        assertions
+        common
+        conf
+        coverage
+        env
+        pat
+        pkg
+        transfer
+        type
+        vif
+
+    union_ctrl:
+        sv:
+            axi_master_seq_lib
+            axi_master_slave_lib
+            conf
+            lib
+            pkg
+            scoreboard
+            vir_seq_lib
+            virtual_sequencer
+        tb:
+            tb
+            test
+            top
+
+}}}          
+         
+
+
+
+已见过的UVM基类：
+{{{
+    uvm_agent
+    uvm_driver
+    uvm_env
+    uvm_monitor
+    uvm_object
+    uvm_phase 
+    uvm_scoreboard
+    uvm_sequence_item
+    uvm_sequencer
+
+}}}
+
+已见过的UVM function:
+{{{
+    `uvm_component_utils_begin() //每一个class里都有
+    `uvm_component_utils_end()
+    `uvm_object_utils_begin //以下五条最早见于/uvc/axi_transfer.sv
+        `uvm_field_enum (itype_enum, itype,   UVM_DEFAULT)
+        `uvm_field_int  (id,              UVM_DEFAULT)
+        `uvm_field_queue_int(data,            UVM_DEFAULT)
+    `uvm_object_utils_end
+
+
+    
+    uvm_test_done.raise_objection(this);
+    uvm_test_done.drop_objection(this); 
+        ~/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/SIM/asyn_fifo_vir_seq_lib.sv
+    
+}}}
+
+
+语法：
+{{{ 
+
+    UVM class 声明例：
+    {{{ 
+    ~/TM_work/pulpino_test/union_ctrl/uvc/axi_master_driver.sv:
+        class AXI_master_driver extends uvm_driver #(AXI_transfer);
+          virtual interface AXI_vif   m_vif;
+          
+          `uvm_component_utils_begin(AXI_master_sequencer)
+          `uvm_component_utils_end
+
+          extern virtual function void assign_vi(virtual interface AXI_vif vif);
+
+        endclass : AXI_master_driver
+
+        function void AXI_master_driver::assign_vi(virtual interface AXI_vif vif);
+          m_vif = vif;
+        endfunction
+
+
+    }}}
+    
+    include 和import package:
+    {{{
+        声明package, UVC/axi_pkg.sv:
+            package axi_pkg;
+            import uvm_pkg::*;
+            endpackage : axi_pkg
+
+        import package, union_ctrl_env/sv/union_ctrl_pkg.sv:
+            `include "axi_pkg.sv"
+            import axi_pkg::*;
+    }}}
+
+    systemverilog 方法:
+        {{{
+        $cast()
+            首次见于uvc/sequence_libs/axi_master_write_seq_lib.sv
+            Similarly, SystemVerilog casting means the conversion of one data type to another datatype.
+
+        
+
+        }}}
+        
+    systemverilog datatype:
+    {{{ 
+        //以下最早见于/uvc/axi_transfer.sv
+        rand int unsigned addr_wt_delay  = 0;
+        constraint c_transmit_delay { 1 <= transmit_delay <= 10; }
+        rand itype_enum       itype;
+        rand direction_enum   rw;
+        以下几个很奇怪，在AXI_base里，有一个信号就有一个len_enum，不像标准的数据类型，可能是写的人做的别称
+        rand len_enum 	      len;
+        rand byte_enum        size;
+        rand burst_enum       burst;
+        rand lock_enum        lock;
+        rand cache_enc_enum   cache;
+        rand protect_enc_enum prot;
+        rand response_enum    resp;
+        
+        event, 最早见于uvc/axi_master_driver.sv
+        event  event_sent_write_trx;
+            
+
+    }}}
+
+    assert:
+    {{{
+        例1：uvc/axi_vif.sv 
+        {{{
+            assertWriteRespUnKnown 应该是他起的名字，因为这里每个名字都不同。语法不难理解。
+            always @(negedge AXI_ACLK)
+            begin
+            assertWriteRespUnKnown:assert property (
+                disable iff(!has_checks)
+                  ($onehot(AXI_BVALID) && $onehot(AXI_BREADY) |-> !$isunknown(AXI_BRESP)))
+                else
+                  $error({$psprintf("ERR_AXI_BRESP %s went to X or Z during response write phase when AXI_BVALID=1", name)});
+            end
+        }}}
+    }}}
+
+}}}
+
+
+
+
+
+各路径下文件汇总：
+UVC:
+{{{
+    axi_pkg.sv:
+    {{{
+        这里include了好多sv文件，应该就是把这些和axi相关的文件打包成一个pkg文件。在union_ctrl_env/union_ctrl_pkg.sv里会include它。
+        语法：
+            package axi_pkg;
+            import uvm_pkg::*;
+            endpackage : axi_pkg
+            外面的文件用package里的东西，要:
+                `include "axi_pkg.sv"
+                import axi_pkg::*;
+            参考 union_ctrl_env/sv/union_ctrl_pkg.sv
+    }}}
+
+    根据axi_pkg.sv的列表顺序：
+    axi_type.sv
+
+    axi_conf.sv
+    
+    axi_transfer.sv:
+    {{{
+        class AXI_base extends uvm_sequence_item
+        class AXI_transfer extends AXI_base;
+        
+          {{{  
+            rand itype_enum       itype;
+            rand direction_enum   rw;
+            rand int unsigned     addr;
+            rand int unsigned     region;
+            rand len_enum 	      len;
+            rand byte_enum        size;
+            rand burst_enum       burst;
+            rand lock_enum        lock;
+            rand cache_enc_enum   cache;
+            rand protect_enc_enum prot;
+            rand int unsigned     qos;
+            rand int unsigned     strb[$];
+            rand response_enum    resp;
+            rand int unsigned     data[$];
+            rand bit              addr_done;
+            rand bit              data_done;
+            rand int unsigned     mem_datas[$];
+            rand int unsigned     mem_addrs[$];
+        
+
+
+
+          `uvm_object_utils_begin(AXI_transfer)
+            `uvm_field_enum (itype_enum, itype,   UVM_DEFAULT)
+            `uvm_field_enum (direction_enum, rw,  UVM_DEFAULT)
+            `uvm_field_int  (addr,                UVM_DEFAULT)
+            `uvm_field_int  (region,              UVM_DEFAULT)
+            `uvm_field_enum (len_enum, len,       UVM_DEFAULT)
+            `uvm_field_enum (byte_enum, size,     UVM_DEFAULT)
+            `uvm_field_enum (burst_enum, burst,   UVM_DEFAULT)
+            `uvm_field_enum (lock_enum, lock,     UVM_DEFAULT)
+            `uvm_field_enum (cache_enc_enum, cache, UVM_DEFAULT)
+            `uvm_field_enum (protect_enc_enum, prot, UVM_DEFAULT)
+            `uvm_field_int  (qos,                 UVM_DEFAULT)
+            `uvm_field_queue_int(strb,                UVM_DEFAULT)
+            `uvm_field_enum (response_enum, resp, UVM_DEFAULT)
+            `uvm_field_queue_int(data,            UVM_DEFAULT)
+            `uvm_field_int  (addr_done,           UVM_DEFAULT)
+            `uvm_field_int  (data_done,           UVM_DEFAULT)
+            `uvm_field_queue_int(mem_datas,       UVM_DEFAULT)
+            `uvm_field_queue_int(mem_addrs,       UVM_DEFAULT)
+          `uvm_object_utils_end
+          }}}
+
+
+        这个文件大概是声明了最基础的类，后面所有的 类似AXI_master_driver这种类都是在AXI_base基础上开发的。
+         
+        AXI_transfer 里声明了很多量，这些量都是在后面直接用的:
+        {{{
+            自定义的量：
+                itype
+                rw
+                addr_done
+                data_done
+                mem_datas
+                mem_addrs
+            指令（AW，AR）：
+                addr
+                region
+                len
+                size
+                burst
+                lock
+                cache
+                prot
+                qos
+            数据（W, R）：
+                strb
+                resp
+                data
+        }}}    
+                
+
+
+        可以猜想，像region，data，addr这些，需要是random的，假如后面的object不手动指定这些值，那么默认就是random的值。
+    }}}
+        
+
+
+    axi_common.sv:
+        class AXI_queue extends uvm_object;
+    
+
+    axi_master_monitor.sv
+        uvm_monitor
+    
+    axi_master_driver.sv:
+        class AXI_master_driver extends uvm_driver #(AXI_transfer);
+        sent_addr_write_trx()这个函数就演示了如何使用AXI_transfer类的东西，
+        
+ 
+    axi_master_sequencer.sv
+        class AXI_master_sequencer extends uvm_sequencer #(AXI_transfer);
+
+    axi_master_agent.sv:
+        class AXI_master_agent extends uvm_agent;
+        现在知道这个文件非常重要，它里面把driver， sequencer和monitor连在了一起。外面并不直接调用driver里的函数，而是用sequence发东西。
+
+		  m_driver.seq_item_port.connect(m_sequencer.seq_item_export);
+        这一条就把driver的sequence port连到了sequencer上了
+        
+        具体看后面文件调用部分。
+        
+
+
+
+
+    axi_vif.sv:
+        这就是AXI的interface
+        he didn't write modport
+      
+
+
+
+ 
+    sequence_libs/
+    {{{
+        axi_based_seq_lib.sv 
+            class AXI_base_seq extends uvm_sequence #(AXI_transfer);
+            class AXI_master_write_new_seq extends AXI_base_seq;
+
+        axi_master_based_seq_lib.sv
+            class AXI_master_base_seq extends AXI_base_seq;
+ 
+        axi_master_write_seq_lib.sv
+            在这里声明了一个让axi master 写的sequence类形数据。
+
+            class AXI_master_write_seq extends AXI_transfer;
+                AXI_transfer m_trx;
+                super.new(name); //super就是个AXI_transfer类型对象
+                $cast(m_trx, super); //把m_trx转给super
+                m_trx.data          = data;
+                
+
+        axi_master_read_seq_lib.sv
+            class AXI_master_read_seq extends AXI_transfer;
+    }}}
+}}}
+
+union_ctrl_env:
+{{{
+    sv
+        axi_master_slave_lib
+        conf
+        lib
+        vir_seq_lib
+        
+        union_ctrl_pkg.sv
+            {{{
+            这里include了很多sv文件，就是把这个路径下所有的union_ctrl 相关的sv文件打包
+            语法： 
+                `include "axi_pkg.sv"
+                `include "axi_seq_lib_pkg.sv"
+
+                import uvm_pkg::*;
+                `include "uvm_macros.svh" #这个文件到处都在用，只要用UVM的地方都要include这个文件
+
+                import axi_pkg::*;
+                import axi_seq_lib_pkg::*;
+    
+            }}}
+        
+        根据union_ctrl_pkg.sv的文件列表：
+        union_ctrl_conf.sv
+        
+        union_ctrl_scoreboard.sv
+            class Demo_scoreboard extends uvm_scoreboard;
+
+
+        union_ctrl_axi_master_seq_lib.sv
+        union_ctrl_virtual_sequencer.sv
+            这里实例化了axi_pkg::AXI_master_sequencer
+            class union_ctrl_virtual_sequencer extends uvm_sequencer;
+
+    tb:
+        union_ctrl_tb.sv
+            这里实例化了union_ctrl_virtual_sequencer
+            class union_ctrl_tb extends uvm_env;  
+        union_ctrl_test.sv
+            这里实例化了union_ctrl_tb 
+        union_ctrl_top1.sv
+            只实例化了test
+            所有的声明包括clk和波形都在这里。
+
+            `include "axi_vif.sv"
+            `include "axi_pkg.sv"
+            `include "axi_seq_lib_pkg.sv"
+            `include "union_ctrl_pkg.sv"
+            `include "axi_bus.sv"
+    
+}}}
+
+文件调用结构 大概是这样：
+    top: union_ctrl_env/tb/sv/union_ctrl_top.sv
+        
+        `include "axi_seq_lib_pkg.sv" 
+            `include "axi_pkg.sv"
+                `include "axi_master_agent.sv" //agent 负责把sequence 和driver 和monitor连在一起。
+                只要sequencer里有了东西，这些东西就会被driver接收，自动call driver的函数。
+                
+
+            `include "axi_master_based_seq_lib.sv" //axi 写类型的sequence
+        `include "union_ctrl_pkg.sv"
+
+        initial begin
+            uvm_config_db#(virtual interface AXI_vif)::set(uvm_root::get(), "*", "m_vif", axi_vif_0);
+            run_test("union_ctrl_test");
+                //网上说run_test()是个UVM的函数
+          end
+
+    
+        ARES 12/2
+        union_ctrl_test
+            union_ctrl_vseq //这个真是叫vseq，不要改！
+                ~/TM_work/pulpino_test/union_ctrl/union_ctrl_env/sv/union_ctrl_vir_seq_lib.sv"
+                   union_ctrl_axi_master_seq master_seq;
+                    这里才是真正实例化driver的地方
+                 
+            virtual task body();
+                uvm_test_done.raise_objection(this);
+                `uvm_info("vesq",$psprintf("Doning union_ctrl_vseq"),UVM_LOW)
+                fork 
+                    `uvm_do_on(master_seq,p_sequencer.axi_sequencer) 
+                join
+                #1000000;
+                uvm_test_done.drop_objection(this);
+            endtask :body
+            这样理解，就是 vseq 的body是主体被call，
+                里面的fork `uvm_do_on call了master_seq,就算不call它其实都没事。
+
+
+
+
+~/TM_work/pulpino_test/union_ctrl/rsim/simv.log
+这些message很有用：
+{{{
+  uvm_test_top                   union_ctrl_test               -     @460 
+  m_union_ctrl_tb              union_ctrl_tb                 -     @472 
+    m_axi_env                  AXI_env                       -     @623 
+      m_masters[0]             AXI_master_agent              -     @633 
+        m_driver               AXI_master_driver             -     @673 
+          rsp_port             uvm_analysis_port             -     @690 
+          seq_item_port        uvm_seq_item_pull_port        -     @681 
+          m_num_sent           integral                      32    'h0  
+        m_monitor              AXI_master_monitor            -     @653 
+          item_collected_port  uvm_analysis_port             -     @661 
+          m_num_col            integral                      32    'h0  
+          checks_enable        integral                      1     'h1  
+          coverage_enable      integral                      1     'h1  
+        m_sequencer            AXI_master_sequencer          -     @699 
+          rsp_export           uvm_analysis_export           -     @707 
+          seq_item_export      uvm_seq_item_pull_imp         -     @813 
+          arbitration_queue    array                         0     -    
+          lock_queue           array                         0     -    
+          num_last_reqs        integral                      32    'd1  
+          num_last_rsps        integral                      32    'd1  
+      m_slaves[0]              AXI_slave_agent               -     @641 
+        m_monitor              AXI_slave_monitor             -     @831 
+          item_collected_port  uvm_analysis_port             -     @839 
+          item_read_port       uvm_analysis_port             -     @857 
+          item_write_port      uvm_analysis_port             -     @848 
+          m_num_col            integral                      32    'h0  
+          checks_enable        integral                      1     'h1  
+          coverage_enable      integral                      1     'h1  
+      m_env_conf               Demo_conf                     -     @603 
+        m_slave_confs          da(object)                    1     -    
+          [0]                  AXI_slave_conf                -     @604 
+        m_master_confs         da(object)                    1     -    
+          [0]                  AXI_master_conf               -     @605 
+        m_num_slaves           integral                      32    'h1  
+        m_num_masters          integral                      32    'h1  
+      checks_enable            integral                      1     'h1  
+      coverage_enable          integral                      1     'h1  
+      m_masters                da(object)                    1     -    
+        [0]                    AXI_master_agent              -     @633 
+          m_driver             AXI_master_driver             -     @673 
+          m_monitor            AXI_master_monitor            -     @653 
+          m_sequencer          AXI_master_sequencer          -     @699 
+      m_slaves                 da(object)                    1     -    
+        [0]                    AXI_slave_agent               -     @641 
+          m_monitor            AXI_slave_monitor             -     @831 
+    m_union_ctrl_scoreboard    Demo_scoreboard               -     @606 
+      item_collected_imp       uvm_analysis_imp              -     @614 
+      disable_scoreboard       integral                      1     'h0  
+      m_num_writes             integral                      32    'd0  
+      m_num_reads              integral                      32    'd0  
+    virtual_sequencer          union_ctrl_virtual_sequencer  -     @480 
+      rsp_export               uvm_analysis_export           -     @488 
+      seq_item_export          uvm_seq_item_pull_imp         -     @594 
+      arbitration_queue        array                         0     -    
+      lock_queue               array                         0     -    
+      num_last_reqs            integral                      32    'd1  
+      num_last_rsps            integral                      32    'd1  
+------------------------------------------------------------------------
+UVM_INFO ../union_ctrl_env/sv/union_ctrl_vir_seq_lib.sv(23) @ 0: uvm_test_top.m_union_ctrl_tb.virtual_sequencer@@union_ctrl_vseq [vesq] Doning union_ctrl_vseq
+UVM_INFO ../union_ctrl_env/sv/union_ctrl_axi_master_seq_lib.sv(762) @ 0: uvm_test_top.m_union_ctrl_tb.m_axi_env.m_masters[0].m_sequencer@@union_ctrl_vseq.master_seq [union_ctrl_axi_master_seq] ARES Starting... //这个ARES starting是我在~/TM_work/pulpino_test/union_ctrl/testcase/NpuMemRwTest6/vlog/test.sv里面加的
+UVM_INFO ../uvc/axi_master_driver.sv(116) @ 2500: uvm_test_top.m_union_ctrl_tb.m_axi_env.m_masters[0].m_driver [AXI_master_driver] Reset observed
+UVM_INFO ../uvc/axi_master_driver.sv(163) @ 12500: uvm_test_top.m_union_ctrl_tb.m_axi_env.m_masters[0].m_driver [AXI_master_driver] Reset dropped
+UVM_INFO ../uvc/axi_master_driver.sv(194) @ 13500: uvm_test_top.m_union_ctrl_tb.m_axi_env.m_masters[0].m_driver [AXI_master_driver] Driving}}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rsim/run
+    ./run -t NpuMemRwTest6  -debug verdi
+        -t 是$main::Test
+    #75  verdi -sv  -ntb_opts uvm -timescale=1ns/1ps -f flist.f -top union_ctrl_top -ssf union_ctrl_top.fsdb
+        说明 top就是union_ctrl_top
+
+单个testcase：
+NpuMemRwTest6/test.sv
+{{{
+    这个文件写的和
+        union_ctrl_env/sv/union_ctrl_axi_master_seq_lib.sv
+    是一样的，看来是直接拷来的。
+    说明其他的所有的test.sv都是从上面这个为模板搞出来的。
+
+    语法:
+    {{{
+    class union_ctrl_axi_master_seq extends AXI_master_base_seq;
+        //AXI_master_base_seq 见 uvc/sequence_libs/axi_master_based_seq_lib.sv
+        AXI_master_write_seq  m_wr_seq;
+        AXI_master_read_seq   m_rd_seq;
+
+        m_wr_seq = new (
+               .name         ("axi_master_write_data_after_write_addr"),
+               .addr         (32'h1200_0008),
+               .ibyte        (BYTE_4),
+               .len          (LEN_1),
+               .burst        (FIXED),
+               .id           (1 + m_inc_id),
+               .data         ({ 32'h8883_61e7}),
+                                //32'h0000_0002 + m_inc_data,
+                                //32'h0000_0003 + m_inc_data,
+                                //32'h0000_0004 + m_inc_data} ),
+               .strb         ({4'b1111}),
+                             //  4'b1111,
+                             //  4'b1111,
+                             //  4'b1111 } ),
+               .addr_delay  (0),
+               .data_delay  (0), // write data after write addr
+               .resp_delay  (0)
+         );
+
+
+        //m_inc_addr += 32'h0001_0000;
+        //m_inc_data += 32'h0001_0000;
+        m_inc_id   += 1;
+        start_item(m_wr_seq);
+        finish_item(m_wr_seq);
+
+
+repeat(16) begin
+        m_rd_seq = new(
+               .name         ("axi_master_write_data_after_write_addr"),
+               .addr         (32'h1204_0000+4*m_inc_id),
+               .ibyte        (BYTE_4),
+               .len          (LEN_1),
+               .burst        (FIXED),
+               .id           (10 + m_inc_id),
+               .addr_delay   (0),
+               .data_delay   (0)
+         );
+
+        start_item(m_rd_seq);
+        finish_item(m_rd_seq);
+
+        //m_inc_addr += 32'h0001_0000;
+        //m_inc_data += 32'h0001_0000;
+        m_inc_id   += 1;
+        #100;
+
+end
+
+    start_item(m_wr_seq), finish_item(m_wr_seq);
+    这两个函数是uvm_sequence的成员。
+    以下code上面都有，这里只是再写一遍来列出他们之间的继承关系
+    class union_ctrl_axi_master_seq extends AXI_master_base_seq
+        class AXI_master_base_seq extends AXI_base_seq; //uvc/sequence_libs/axi_master_based_seq_lib.sv
+            class AXI_base_seq extends uvm_sequence #(AXI_transfer); //uvc/sequence_libs/axi_based_seq_lib.sv 
+            class AXI_master_write_new_seq extends AXI_base_seq;
+
+
+
+    }}}
+  
+
+ 
+}}}
+
+
+
+
+个人感想：
+    . 按照axi_vif.sv写interface和assert
+    . 按照  axi_transfer.sv为模板写基类
+    . 按照  axi_master_driver.sv写driver
+   
+    . sequence这个办法挺好，我也可以写一个agent，把monitor，driver sequencer连在一起，tb只写sequence，只要发现sequencer里有东西就call driver的function
+
+
+文件模仿对照表：
+    /home/ares/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/TB
+        /home/ares/TM_work/pulpino_test/union_ctrl/uvc
+
+/home/ares/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/TB/asyn_fifo_interface.sv DONE
+    /home/ares/TM_work/pulpino_test/union_ctrl/uvc/axi_vif.sv
+ 
+/home/ares/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/TB/asyn_fifo_driver.sv
+    /home/ares/TM_work/pulpino_test/union_ctrl/uvc/axi_master_driver.sv
+    
+
+
+/home/ares/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/TB/asyn_fifo_agent.sv
+    ~/TM_work/pulpino_test/union_ctrl/uvc/axi_master_agent.sv
+
+/home/ares/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/TB/asyn_fifo_transfer.sv DONE?
+    /home/ares/TM_work/pulpino_test/union_ctrl/uvc/axi_transfer.sv
+
+/home/ares/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/TB/asyn_fifo_pkg.sv
+    /home/ares/TM_work/pulpino_test/union_ctrl/uvc/axi_pkg.sv
+
+/home/ares/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/TB/asyn_fifo_master_sequencer.sv
+    ~/TM_work/pulpino_test/union_ctrl/uvc/axi_master_sequencer.sv
+
+
+
+
+/home/ares/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/TB/test_case/asyn_fifo_master_test_case.sv
+    /home/ares/TM_work/pulpino_test/union_ctrl/union_ctrl_env/sv/union_ctrl_axi_master_seq_lib.sv
+
+
+~/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/SIM/asyn_fifo_uvm_top.sv
+    ~/TM_work/pulpino_test/union_ctrl/union_ctrl_env/tb/sv/union_ctrl_top.sv
+
+    ~/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/SIM/asyn_fifo_virtual_sequencer.sv
+        ~/TM_work/pulpino_test/union_ctrl/union_ctrl_env/sv/union_ctrl_virtual_sequencer.sv
+
+    ~/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/SIM/asyn_fifo_vir_seq_lib.sv
+        ~/TM_work/pulpino_test/union_ctrl/union_ctrl_env/sv/union_ctrl_vir_seq_lib.sv
+
+    ~/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/SIM/asyn_fifo_tb.sv
+        ~/TM_work/pulpino_test/union_ctrl/union_ctrl_env/tb/sv/union_ctrl_tb.sv
+
+    ~/local_git_clone/RTL_experiments/asynchronous_FIFO_version_2/UVM/SIM/asyn_fifo_test.sv
+        ~/TM_work/pulpino_test/union_ctrl/union_ctrl_env/tb/sv/union_ctrl_test.sv
+
+
+
+
+
+
+
+

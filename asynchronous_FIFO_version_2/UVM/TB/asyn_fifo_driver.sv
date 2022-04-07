@@ -10,7 +10,7 @@ extends uvm_driver #(
     parameter FIFO_LENGTH	= 16;
 	parameter ADDR_BIT = 4;
 
-    virtual asyn_fifo_interface.tb channel;
+    virtual des_if.tb channel;
     
     asyn_fifo_transfer m_wr_queue[$];
     asyn_fifo_transfer m_rd_queue[$];
@@ -36,7 +36,7 @@ extends uvm_driver #(
     endfunction
 
 
-    extern virtual function void assign_vi(virtual asyn_fifo_interface.tb tb_channel);
+    extern virtual function void assign_vi(virtual des_if.tb tb_channel);
     extern virtual task run_phase(uvm_phase phase);
 
     extern virtual function void connect_phase(uvm_phase phase);
@@ -57,7 +57,7 @@ endclass : asyn_fifo_uvm_driver_class
 //}}}
 
 
-function void asyn_fifo_uvm_driver_class::assign_vi(virtual asyn_fifo_interface.tb tb_channel);
+function void asyn_fifo_uvm_driver_class::assign_vi(virtual des_if.tb tb_channel);
     this.channel = tb_channel;    //这句和assign_vi一样
 endfunction
 
@@ -65,7 +65,7 @@ endfunction
 function void asyn_fifo_uvm_driver_class::connect_phase(uvm_phase phase);
     super.connect_phase(phase);
 
-    if (!uvm_config_db#(virtual asyn_fifo_interface.tb)::get(this, "", "channel", this.channel)) 
+    if (!uvm_config_db#(virtual des_if.tb)::get(this, "", "channel", this.channel)) 
     begin
         `uvm_error("NOVIF",{"virtual interface must be set for: ",get_full_name(),".channel"});
     end

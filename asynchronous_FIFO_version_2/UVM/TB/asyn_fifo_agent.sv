@@ -5,7 +5,7 @@
 class asyn_fifo_agent extends uvm_agent;
 
     //AXI_master_conf     m_conf;
-    virtual asyn_fifo_interface.tb channel;
+    virtual des_if.tb channel;
 
 	asyn_fifo_uvm_driver_class  m_driver;
 	asyn_fifo_master_sequencer	m_sequencer;
@@ -60,7 +60,7 @@ class asyn_fifo_agent extends uvm_agent;
 
 	// assign virtual interface
 	//virtual function void assign_vi(virtual interface asyn_fifo_vif axi_vif);
-	virtual function void assign_vi(virtual asyn_fifo_interface.tb channel);
+	virtual function void assign_vi(virtual des_if.tb channel);
         this.channel = channel;
 	endfunction : assign_vi
 
