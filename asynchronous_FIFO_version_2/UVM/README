@@ -1,1 +1,20 @@
-这个是老版本，按官方教程写的，编译不过，以后再研究。
+这个是老版本，按照pulpino的UVM写的。ARES_UVM_note 是从pulpino那边拷过来的。有完整的文件对照表，应该能说明问题。
+
+top.sv
+    top
+
+test.sv
+    generate num
+
+test_case.sv
+    write all test_case tasks.
+
+sequence.sv
+    receive num, call test_case body(). all tasks write in test_case body will be called as sequence item.
+
+
+
+top.sv
+    test.sv
+        tb.sv
+

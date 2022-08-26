@@ -1,0 +1,5 @@
+这里的asyn_fifo_sim_main.sv不是真正用UVM的，仅仅是用UVM的一个urandom_range函数随机生成一点input data
+普通方式就是make vcs
+make uvm可以跑那个用一点uvm库的tb case
+
+真正的uvm环境要去外面的UVM_1/SIM下面跑

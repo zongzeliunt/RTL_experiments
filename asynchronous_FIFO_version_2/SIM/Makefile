@@ -14,7 +14,7 @@ UVM_COMP = vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed -deb
 	-f uvm_flist.f \
 	-P /home/ares/Tool/vcs_install/verdi/share/PLI/VCS/LINUX64/novas.tab \
 	/home/ares/Tool/vcs_install/verdi/share/PLI/VCS/LINUX64/pli.a \
-	+define+UVM_SIM 
+	+define+UVM_TB_SIM 
 
 VCS = vcs -full64 -cpp g++-4.8 -cc gcc-4.8 -LDFLAGS -Wl,--no-as-needed -debug_pp \
 	-sverilog \

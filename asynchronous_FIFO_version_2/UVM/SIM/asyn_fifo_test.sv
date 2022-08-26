@@ -21,6 +21,7 @@ class asyn_fifo_test extends uvm_test;
     endfunction : connect_phase
 
     task run_phase(uvm_phase phase);
+        $display ("ARES asyn fifo test");
         //m_printer.knobs.depth = 5;
         this.print(m_printer);
         //phase.phase_done.set_drain_time(this, 1000);

@@ -10,8 +10,11 @@ module asyn_fifo #
 )
 (
 
+    `ifdef UVM_SIM //use uvm interface
     des_if.rtl rtl_interface
-
+    `else //use common interface
+    asyn_fifo_interface.rtl rtl_interface
+    `endif
 
 );
     

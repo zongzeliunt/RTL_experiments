@@ -33,11 +33,9 @@ function void asyn_fifo_tb::build_phase(uvm_phase phase);
 endfunction : build_phase
 
 // TLM analysis port from master/slave monitor to scoreboard
-/*
 function void asyn_fifo_tb::connect_phase(uvm_phase phase);
-    Virtual_sequencer.axi_sequencer = m_axi_env.m_masters[0].m_sequencer;
+    //Virtual_sequencer.axi_sequencer = m_axi_env.m_masters[0].m_sequencer;
     //M_axi_env.m_masters[0].m_monitor.item_collected_port.connect(m_asyn_fifo_scoreboard.item_collected_imp);
     //M_axi_env.m_slaves[0].m_monitor.item_collected_port.connect(m_asyn_fifo_scoreboard.item_collected_imp);
 endfunction : connect_phase
-*/
 `endif // ASYN_FIFO_TB_SV
