@@ -11,13 +11,32 @@ TB:
     test.sv
         asyn_fifo_test
             generate num,
+        
+
+
     sequence.sv:
         receive the num, run `uvm_do(m_test_case)
 
     test_case:
         run send_w(), send_r()
-
+        其实就是产生两个事件（Item），把事件里的标记设成w或者r
     driver:
         run get_req, receive item and push to queue
+            使用item_transfer来把w Item或者r Item push_back进w_item_queue 或者r_item_queue里
         run run_w_req and run_r_req
-     
+            每个cycle都动，从w_item_queue或者r_item_queue里取出w item或者r item，向interface发信号。
+
+    这个架构的坏处是，就生成了10个w和r事件，执行完了，整个run就停止了。连后续的很多idle情况都看不见。这是12/21/22发现的一个小问题。
+
+调用结构是这样的：
+asyn_fifo_uvm_top.sv
+    test.sv: asyn_fifo_test
+        base_test
+            gen_item_seq: sequence.sv
+ 
+在base_test:run_phase里面加#400， 和在sequence.sv里面加#400意思是一样的。
+以前run_phase里只有#200，这个等意义不大，它等的时间不够长，不够等那10个r事件结束。假如把这个#200变成#400就够长了。
+我在sequence.sv里加入的#200，正好够长，所以才让我看到了。
+所以，以后遇见类似的只造事件，事件结束整个sim就结束的情形，要在run_phase里面把wait拉长，这样就可以看到最后那么一点点idle情形了。
+
+ 

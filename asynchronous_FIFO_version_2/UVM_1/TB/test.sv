@@ -32,7 +32,7 @@ class base_test extends uvm_test;
         phase.raise_objection(this);
         //apply_reset();
         seq.start(e0.a0.s0);
-        #200;
+        #400;
         phase.drop_objection(this);
     endtask
     
