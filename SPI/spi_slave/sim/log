@@ -1,0 +1,73 @@
+AN_329_User_Guide_for_LibFT4222.pdf
+
+#29 
+SPI mode    | CPOL (clock polarity) | CPHA (Clock phase)
+0           |   0                   |   0
+1           |   0                   |   1
+2           |   1                   |   0
+3           |   1                   |   1
+CPOL: CLK_IDLE_LOW/HIGH
+CPHA: CLK_LEADING/TRAILING
+CS:     CS_ACTIVE_LOW/HIGH
+
+改动：
+slave:
+    发现一个bug，SPI_MODE=0的时候一切正常，但是=1的时候会发生最后一个接收到的数据不能被报出来的情况。进行如下改动：
+    //assign w_SPI_Clk = w_CPHA ? ~i_SPI_Clk : i_SPI_Clk;
+    assign w_SPI_Clk = w_CPOL ? ~i_SPI_Clk : i_SPI_Clk;
+    这样改的目的是，i_SPI_Clk可能会idle为1或者0，但是slave里面采样的时候是用posedge w_SPI_Clk采的，不管i_SPI_Clk idle是1是0，w_SPI_Clk一定是idle为0。
+    但是slave里面有一个新的问题，就是w_CPHA其实没有考虑到，
+
+教程：
+https://www.cnblogs.com/gmpy/p/12461461.html
+{{{
+先说结论：
+mode 0和3一样，升沿采
+mode 1 和 2 一样，降沿采
+
+CPOL = 0:
+    ILDE = 0
+    leading edge (第一个跳变沿): 升
+    trailing edge(第二个跳变沿): 降
+CPOL = 1:
+    ILDE = 1
+    leading edge (第一个跳变沿): 降
+    trailing edge(第二个跳变沿): 升
+
+CPHA = 0:
+    第一个跳变沿采
+CPHA = 1:
+    第二个跳变沿采
+
+mode = 0:
+    CPOL = 0, CPHA = 0
+    leading edge: 升
+    trailing edge: 降
+    master: trail(降)沿变
+    slave: lead(升)沿采
+
+mode = 1:
+    CPOL = 0, CPHA = 1
+    leading edge: 升
+    trailing edge: 降
+    master: lead(升)沿变
+    slave: trail(降)沿采
+
+mode = 2：
+    CPOL = 1, CPHA = 0
+    leading edge: 降
+    trailing edge: 升
+    master:trail(升)沿变
+    slave: lead(降)沿采
+
+mode = 3:
+    CPOL = 1, CPHA = 1 
+    leading edge: 降
+    trailing edge: 升
+    master: lead(降)沿变
+    slave: trail（升)沿采
+}}}
+
+回到改动：
+    slave端永远用w_SPI_Clk 上升沿来采，那么既然CPOL为1时用i_SPI_Clk降沿采，那就直接在CPOL=1时用w_SPI_Clk把i_SPI_Clk的翻转就可以了。所以我的改动是有道理的。
+
